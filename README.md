@@ -7,6 +7,10 @@
   <img src="https://img.shields.io/github/license/Pix3lPirat3/mineprompt" />
 </p>
 
+<p align="center">
+  <img width="460" height="300" src="https://i.imgur.com/Jar4wMi.png">
+</p>
+
 ---
 
 ### Notice
