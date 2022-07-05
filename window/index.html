@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' http://xxxx 'unsafe-inline' 'unsafe-eval';">
+  <link href="../node_modules/jquery.terminal/css/jquery.terminal.min.css" rel="stylesheet" />
+  <link href="./css/reset.css" rel="stylesheet" />
+</head>
+
+<body style="height: 100%; margin: 0;">
+  <style>
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  .box {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+  }
+
+  .box .row.content {
+    flex: 1 1 auto;
+  }
+
+  .box .row.footer {
+    flex: 0 1 40px;
+  }
+
+  .flash-red {
+    color: red;
+  }
+  </style>
+  <div class="box">
+    <div id="terminal" style="height: 100%; min-width: 100%; overflow-y: hidden;"></div>
+    <style>
+    .footer div {}
+
+    .footer ul li {
+      display: inline;
+    }
+    </style>
+    <div class="footer" style="background-color: black; color: #757575; padding: 5px; border-top: 1px solid #353535;">
+
+      <div id="footer-left" style="float: left;">
+
+      </div>
+      
+      <ul id="footer-right" style="float: right; padding: 0;">
+
+      </ul>
+    </div>
+  </div>
+  <!-- Insert this line above script imports  -->
+  <script>
+  if (typeof module === 'object') {
+    window.module = module;
+    module = undefined;
+  }
+  </script>
+  <!-- normal script imports etc  -->
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="../node_modules/jquery.terminal/js/jquery.terminal.min.js"></script>
+  <script src="../node_modules/jquery.terminal/js/autocomplete_menu.js"></script>
+  <style>
+  </style>
+  <script src="../internal/terminal.js"></script>
+  <!-- Insert this line after script imports -->
+  <script>
+  if (window.module) module = window.module;
+  </script>
+  <script src="../internal/lang.js"></script>
+  <script src="../internal/mineflayer.js"></script>
+</body>
+
+</html>

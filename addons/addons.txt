@@ -1,0 +1,4 @@
+commands:
+	 - pickup|grab <item>
+	 - equip <item>
+	 - players/online (Show online players)
