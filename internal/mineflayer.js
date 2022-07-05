@@ -107,7 +107,7 @@ function startClient(options) {
 		let chatLogger; // Opened once chat is spoken, saves on files and memory.
 
     bot.on('chat:formatted', function(group, tag, username, suffix, message) {
-    	if(!chatLogger) chatLogger = fs.createWriteStream(`chat-${dateMonthDayYear}.txt`, { flags: 'a' }); // Only open if needed
+    	if(!chatLogger) chatLogger = fs.createWriteStream(`chat-${dateMonthDayYear}.logs`, { flags: 'a' }); // Only open if needed
 
     	message = message.replaceAll('§', ''); // Remove the Minecraft (Minecraft uses § in the backend) color codes from the message
 

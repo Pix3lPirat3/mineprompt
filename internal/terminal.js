@@ -20,10 +20,8 @@ var term = $('#terminal').terminal(function(input) {
     return;
   }
 
-  // TODO : Patch for aliases (Commands fail once a file doesn't have aliase)
-  //var cmd_object = Object.entries(term_commands).filter(a => a[1].cmd === cmd || a[1].aliases.includes(cmd))?.[0]?.[1];
+  var cmd_object = Object.entries(term_commands).filter(([a, b]) => b.cmd === cmd || b.aliases?.includes(cmd))?.[0]?.[1];
 
-  var cmd_object = Object.entries(term_commands).filter(a => a[1].cmd === cmd)?.[0]?.[1];
   if (!cmd_object) return term.echo(i18n.t('commands.unknown_command')).id();
   cmd_object.handler('CONSOLE', args);
 }, {
