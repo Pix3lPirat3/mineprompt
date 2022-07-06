@@ -6,13 +6,20 @@ var term_commands = {};
 var term = $('#terminal').terminal(function(input) {
   var command = $.terminal.parse_command(input);
   var cmd = command.name;
+  console.log('SENT CMD:', cmd)
   var args = command.args;
-
+  if(cmd === 'help') {
+    if(!Object.keys(term_commands).length) return term.echo(i18n.t('misc.prompt.init')).id();
+    return term.echo(Object.entries(term_commands).map(([a, b]) => `"${b.cmd}" \u00bb "${b.description}"`).join('\n')).id();
+  }
   if (cmd === 'connect') {
+
+    var host = args[1].split(':');
+
     var options = {
       username: args[0],
-      host: args[1],
-      port: 25565,
+      host: host[0],
+      port: host.length ? host[1] : 25565,
       version: args[2] || '1.18.2',
       auth: 'microsoft'
     }
@@ -39,7 +46,7 @@ var term = $('#terminal').terminal(function(input) {
     `;
   },
   onInit: function(term) {
-
+    term.echo(i18n.t('misc.prompt.init')).id();
   },
   keymap: {
     "CTRL+R": function() {
@@ -80,3 +87,4 @@ var term = $('#terminal').terminal(function(input) {
     });
   }
 });
+

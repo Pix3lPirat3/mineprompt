@@ -9,6 +9,8 @@ require('moment-precise-range-plugin');
 
 var bot;
 
+var formatterRegistered = false;
+
 function startClient(options) {
 	bot = mineflayer.createBot(options);
 
@@ -41,9 +43,12 @@ function startClient(options) {
 		term.set_prompt(`${bot.username} \u00bb `)
 
 		// Highlight the player's name when mentioned in chat (Optional: sound)
-    $.terminal.new_formatter(function(string, options) {
-      if (options.echo) return string.replace(new RegExp(bot.username, 'gi'), i18n.t('misc.chat.highlight', { username: bot.username }));
-    });
+
+		if(!formatterRegistered) {
+	    $.terminal.new_formatter(function(string, options) {
+	      if (options.echo) return string.replace(new RegExp(bot.username || 'NULL', 'gi'), i18n.t('misc.chat.highlight', { username: bot.username || 'NULL' }));
+	    });
+		}
 
 		sessionTimer = setInterval(function() {
 			// Object.entries(bot.entity.position.floor()).map(([a, b]) => `${a.toUpperCase()}: ${b}`).join(', ') // => 'X: 1348, Y: 62, Z: 1352'

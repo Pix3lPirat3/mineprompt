@@ -15,9 +15,7 @@ i18n
       addPath: "./locales/{{lng}}/{{ns}}.missing.json",
       jsonIndent: 2
     },
-
-    // other options you might configure
-    debug: false,
+    debug: false
   });
 
 console.log(`[Lang] Using language "${i18n.language}" (v.${i18n.t('lang.version')})`)
