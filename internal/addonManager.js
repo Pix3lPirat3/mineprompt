@@ -21,7 +21,7 @@ module.exports = function(bot) {
       	//console.log(`Grabbing: ${__dirname}/../addons/${command_files[a]}`)
         var cmd = require(`${__dirname}/../addons/${command_files[a]}`)(bot);
         if(cmd.type !== 'command') {
-        	echo(`The file '${command_files[a]}' is not a command, ignoring.`).id();
+        	echo(`The file '${command_files[a]}' is not a command, ignoring.`);
         	continue;
         }
         term_commands[cmd.cmd] = cmd;

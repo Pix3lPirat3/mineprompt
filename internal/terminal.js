@@ -36,7 +36,7 @@ var term = $('#terminal').terminal(function(input) {
 
   var cmd_object = Object.entries(term_commands).filter(([a, b]) => b.cmd === cmd || b.aliases?.includes(cmd))?.[0]?.[1];
 
-  if (!cmd_object) return echo(i18n.t('commands.unknown_command')).id();
+  if (!cmd_object) return echo(i18n.t('commands.unknown_command'));
   cmd_object.handler('CONSOLE', args);
 }, {
   name: 'mineprompt',

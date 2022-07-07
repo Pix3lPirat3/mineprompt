@@ -29,7 +29,7 @@ module.exports = function(bot) {
 
   	if(autoclicker.interval || args[0] === 'stop') { // The auto clicker is already running
   		autoclicker.interval = clearInterval(autoclicker.interval)
-      return echo(i18n.t('addons.click.disabled')).id();
+      return echo(i18n.t('addons.click.disabled'));
   	}
 
   	var clickType = Object.entries({left: ['l', 'left'], right: ['r', 'right']}).filter(([a, b]) => b.includes(args[0]))?.[0]?.[0] || 'left' // left / right (Default: left)

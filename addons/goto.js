@@ -14,10 +14,10 @@ module.exports = function(bot) {
 
   async function handler(sender, args) {
     // Should we sort by `i.name ===` then `i.name.startsWith()` then `i.name.includes()``
-    if (args.length === 0) return echo(`[[;#FF5555;]You must specify a player to goto.]`).id();
+    if (args.length === 0) return echo(`[[;#FF5555;]You must specify a player to goto.]`);
     
     var target = bot.players[args[0]]?.entity;
-    if(!target) return echo(`I cannot see a player named [[;#FF5555;]"${args[0]}"]`).id();
+    if(!target) return echo(`I cannot see a player named [[;#FF5555;]"${args[0]}"]`);
 
     var pos = target.position;
     try {

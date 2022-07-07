@@ -29,7 +29,7 @@ module.exports = function(bot) {
       }
 
       var target = bot.players[args[0]]?.entity;
-      if(!target) return echo(i18n.t('addons.circle.failed', { target: args[0] })).id()
+      if(!target) return echo(i18n.t('addons.circle.failed', { target: args[0] }));
       circle(50, target.position)
     }
 

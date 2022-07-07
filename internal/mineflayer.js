@@ -112,12 +112,12 @@ function startClient(options) {
 		let chatLogger; // Opened once chat is spoken, saves on files and memory.
 
     bot.on('chat:formatted', function(group, tag, username, suffix, message) {
-    	if(!chatLogger) chatLogger = fs.createWriteStream(`chat-${dateMonthDayYear}.logs`, { flags: 'a' }); // Only open if needed
+    	if(!chatLogger) chatLogger = fs.createWriteStream(`chat-${dateMonthDayYear}.logs`, { flags: 'a', encoding: 'UTF-8' }); // Only open if needed
 
     	message = message.replaceAll('§', ''); // Remove the Minecraft (Minecraft uses § in the backend) color codes from the message
 
     	echo(i18n.t('events.chat', { bot: bot, group: group, tag: tag, username: username, suffix: suffix, message: message }));
-    	chatLogger.write(i18n.t('logger.chat.format', { bot: bot, group: group, tag: tag, username: username, suffix: suffix, message: message }), 'utf-8', {flags: 'a'});
+    	chatLogger.write(i18n.t('logger.chat.format', { bot: bot, group: group, tag: tag, username: username, suffix: suffix, message: message }), 'UTF-8');
     })
 
 }
