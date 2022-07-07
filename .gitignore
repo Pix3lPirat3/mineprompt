@@ -11,5 +11,4 @@ node_modules/
 *.zip
 
 # ESLint
-.eslintrc
-.eslintrc.js
+.eslintrc*
