@@ -12,3 +12,4 @@ node_modules/
 
 # ESLint
 .eslintrc
+.eslintrc.js
