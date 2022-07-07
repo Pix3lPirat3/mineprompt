@@ -16,14 +16,14 @@ module.exports = function(bot) {
   var awayInterval;
   function toggle() {
     if(!awayInterval) {
-      term.echo(i18n.t('addons.afk.enabled'));
+      echo(i18n.t('addons.afk.enabled'));
       touchGrass()
       awayInterval = setInterval(async function() {
         touchGrass()
       }, 1000 * 30);
       return;
     }
-    term.echo(i18n.t('addons.afk.disabled'));
+    echo(i18n.t('addons.afk.disabled'));
     awayInterval = clearInterval(awayInterval);
   }
 

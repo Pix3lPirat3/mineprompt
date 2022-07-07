@@ -14,8 +14,8 @@ module.exports = function(bot) {
 
   async function handler(sender, args) {
     var command = args.join(' ');
-    if(command.trim().length === 0) return term.echo(i18n.t('addons.cmd.failed')).id();
-    console.log(term.echo(i18n.t('addons.cmd.sent', { command: command })));
+    if(command.trim().length === 0) return echo(i18n.t('addons.cmd.failed')).id();
+    console.log(echo(i18n.t('addons.cmd.sent', { command: command })));
     bot.chat(`/${command}`)
   }
 

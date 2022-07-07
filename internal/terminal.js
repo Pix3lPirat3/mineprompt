@@ -3,6 +3,12 @@ var appVersion = require('../package.json').version;
 var ul;
 var term_commands = {};
 
+function echo(path, objects) {
+  var msg = i18n.t(path, objects);
+  if(!msg.length) return console.log(`[Warn] Path: "${path}" is empty or does not exist.`);
+  term.echo(msg);
+}
+
 var term = $('#terminal').terminal(function(input) {
   if(input.length === 0) return;
   var command = $.terminal.parse_command(input);
@@ -10,8 +16,8 @@ var term = $('#terminal').terminal(function(input) {
   console.log('SENT CMD:', cmd)
   var args = command.args;
   if(cmd === 'help') {
-    if(!Object.keys(term_commands).length) return term.echo(i18n.t('misc.prompt.init')).id();
-    return term.echo('\n' + Object.entries(term_commands).map(([a, b]) => `"${b.cmd}" \u00bb "${b.description}"`).join('\n') + '\n').id();
+    if(!Object.keys(term_commands).length) return echo(i18n.t('misc.prompt.init'));
+    return echo('\n' + Object.entries(term_commands).map(([a, b]) => `"${b.cmd}" \u00bb "${b.description}"`).join('\n') + '\n');
   }
   if (cmd === 'connect') {
 
@@ -30,7 +36,7 @@ var term = $('#terminal').terminal(function(input) {
 
   var cmd_object = Object.entries(term_commands).filter(([a, b]) => b.cmd === cmd || b.aliases?.includes(cmd))?.[0]?.[1];
 
-  if (!cmd_object) return term.echo(i18n.t('commands.unknown_command')).id();
+  if (!cmd_object) return echo(i18n.t('commands.unknown_command')).id();
   cmd_object.handler('CONSOLE', args);
 }, {
   name: 'mineprompt',
@@ -47,7 +53,7 @@ var term = $('#terminal').terminal(function(input) {
     `;
   },
   onInit: function(term) {
-    term.echo(i18n.t('misc.prompt.init')).id();
+    term.echo(i18n.t('misc.prompt.init'));
   },
   keymap: {
     "CTRL+R": function() {

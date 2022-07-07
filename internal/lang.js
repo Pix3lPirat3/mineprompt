@@ -8,7 +8,7 @@ i18n
     ns: 'translation',
     fallbackLng: false,
     initImmediate: false,
-    saveMissing: true,
+    saveMissing: false, // This causes issues when echo'ing, will save random strings echo'd
     saveMissingTo: 'all',
     backend: {
       loadPath: "./locales/{{lng}}/{{ns}}.json",

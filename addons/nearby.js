@@ -13,7 +13,7 @@ module.exports = function(bot) {
   async function handler(sender, args) {
   	var players = Object.entries(bot.entities).filter(([a, b]) => b.type === 'player' && b.username !== bot.username);
   	var distanceMap = players.map(([a, b]) => `${b.username} (${Math.floor(bot.entity.position.distanceTo(b.position))}m)`);
-  	term.echo(`Nearby Players: ${distanceMap.join(', ')}`)
+  	echo(`Nearby Players: ${distanceMap.join(', ')}`)
   }
 
   return addon;

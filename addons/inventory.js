@@ -14,9 +14,9 @@ module.exports = function(bot) {
 
     var items = args[0] ? bot.inventory.items().filter(i => i.name === args[0]) : bot.inventory.items();
 
-    term.echo(`Inventory: [${items.length} Items]`)
+    echo(`Inventory: [${items.length} Items]`)
 
-    term.echo(items.map(function(i) {
+    echo(items.map(function(i) {
       var msg = `[${i.slot}] ${i.count}x ${i.displayName} (${i.name})`;
       if (isTool(i)) {
         let durabilityMax = bot.registry.itemsByName[i.name].maxDurability

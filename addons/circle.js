@@ -19,17 +19,17 @@ module.exports = function(bot) {
   async function handler(sender, args) {
     if(args.length === 0) {
       circle(50, bot.entity.position)
-      term.echo(i18n.t('addons.circle.enabled'));
+      echo(i18n.t('addons.circle.enabled'));
     }
     if(args.length === 1) {
       if(args[0] === 'stop') {
         bot.pathfinder.stop();
-        term.echo(i18n.t('addons.circle.disabled'));
+        echo(i18n.t('addons.circle.disabled'));
         return stop = true;
       }
 
       var target = bot.players[args[0]]?.entity;
-      if(!target) return term.echo(i18n.t('addons.circle.failed', { target: args[0] })).id()
+      if(!target) return echo(i18n.t('addons.circle.failed', { target: args[0] })).id()
       circle(50, target.position)
     }
 

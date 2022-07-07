@@ -22,17 +22,17 @@ function startClient(options) {
 	bot.pathfinder.setMovements(defaultMove);
 
 	bot.on('error', function(reason) {
-		term.echo(i18n.t('events.error', { reason: reason }));
+		echo(i18n.t('events.error', { reason: reason }));
 	})
 	bot.on('kicked', function(reason) {
-		term.echo(i18n.t('events.kicked', { reason: reason }));
+		echo(i18n.t('events.kicked', { reason: reason }));
 	})
 
   bot.loadPlugin(require('../internal/addonManager.js'))
   bot.commander.load()
 
 	bot.on('spawn', function() {
-		term.echo(i18n.t('events.spawn', { bot: bot, pos: bot.entity.position.floored() }));
+		echo(i18n.t('events.spawn', { bot: bot, pos: bot.entity.position.floored() }));
 	})
 
 	var sessionStart, sessionEnd, sessionTimer, sessionRuntime;
@@ -60,40 +60,40 @@ function startClient(options) {
 	bot.once('end', function(reason) {
 		if(chatLogger) chatLogger.end();
 		sessionTimer = clearInterval(sessionTimer);
-		term.echo(i18n.t('events.end', { username: options.username, reason: reason, runtime: sessionRuntime }));
+		echo(i18n.t('events.end', { username: options.username, reason: reason, runtime: sessionRuntime }));
 		$('#footer-left').text(i18n.t('footer.left.end', { bot: bot, runtime: sessionRuntime }))
 		$('#footer-right').text(i18n.t('footer.right.end', { bot: bot, runtime: sessionRuntime }))
 	})
 
 	bot.on('title', function(title) {
-		term.echo(i18n.t('events.title', { title: title }))
+		echo(i18n.t('events.title', { title: title }))
 	})
 
 	bot.on('health', function() {
-		term.echo(i18n.t('events.health', { health: bot.health, food: bot.food }))
+		echo(i18n.t('events.health', { health: bot.health, food: bot.food }))
 	})
 
 	bot.on('death', function() {
-		term.echo(i18n.t('events.death'))
+		echo(i18n.t('events.death'))
 	})
 
 	bot.on('entitySpawn', function(e) {
 		if(e.type !== 'player' || e.username === bot.username) return;
 		var distance = Math.floor(bot.entity.position.distanceTo(e.position));
-		term.echo(i18n.t('events.playerSpawn', { player: e, distance: distance }))
+		echo(i18n.t('events.playerSpawn', { player: e, distance: distance }))
 	})
 
 	bot.on('entityGone', function(e) {
 		if(e.type !== 'player' || e.username === bot.username) return;
 		var distance = Math.floor(bot.entity.position.distanceTo(e.position));
-		term.echo(i18n.t('events.playerGone', { player: e, distance: distance }))
+		echo(i18n.t('events.playerGone', { player: e, distance: distance }))
 	});
 
 	// Chat Listener
 	var chatPattern = /^(?:\[?(.*?)?\])?\s?(?:\[?(.*?)?\])?\s?([A-Za-z0-9_][^\s]*)\s?(?:\[?(.*?)?\])?\s?(?::|»|>>) (.*)/ 
     bot.on('messagestr', function(message) {
       if(!chatPattern.test(message)) {
-      	term.echo(i18n.t('events.messagestr', { message: message }))
+      	echo(i18n.t('events.messagestr', { message: message }))
         return;
       }
       var parts = chatPattern.exec(message);
@@ -116,7 +116,7 @@ function startClient(options) {
 
     	message = message.replaceAll('§', ''); // Remove the Minecraft (Minecraft uses § in the backend) color codes from the message
 
-    	term.echo(i18n.t('events.chat', { bot: bot, group: group, tag: tag, username: username, suffix: suffix, message: message }));
+    	echo(i18n.t('events.chat', { bot: bot, group: group, tag: tag, username: username, suffix: suffix, message: message }));
     	chatLogger.write(i18n.t('logger.chat.format', { bot: bot, group: group, tag: tag, username: username, suffix: suffix, message: message }), 'utf-8', {flags: 'a'});
     })
 

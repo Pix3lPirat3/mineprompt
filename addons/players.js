@@ -11,7 +11,7 @@ module.exports = function(bot) {
 
 
   async function handler(sender, args) {
-  	term.echo(`Online Players: ${Object.keys(bot.players).join(', ')}`)
+  	echo(`Online Players: ${Object.keys(bot.players).join(', ')}`)
   }
 
   return addon;

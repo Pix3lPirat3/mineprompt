@@ -21,12 +21,12 @@ module.exports = function(bot) {
       	//console.log(`Grabbing: ${__dirname}/../addons/${command_files[a]}`)
         var cmd = require(`${__dirname}/../addons/${command_files[a]}`)(bot);
         if(cmd.type !== 'command') {
-        	term.echo(`The file '${command_files[a]}' is not a command, ignoring.`).id();
+        	echo(`The file '${command_files[a]}' is not a command, ignoring.`).id();
         	continue;
         }
         term_commands[cmd.cmd] = cmd;
         bot.commander.commands.push(cmd);
-        term.echo(i18n.t('misc.addonManager.loaded', { cmd: cmd }));
+        echo(i18n.t('misc.addonManager.loaded', { cmd: cmd }));
       }
 
     }
