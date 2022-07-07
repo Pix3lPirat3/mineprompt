@@ -4,13 +4,14 @@ var ul;
 var term_commands = {};
 
 var term = $('#terminal').terminal(function(input) {
+  if(input.length === 0) return;
   var command = $.terminal.parse_command(input);
   var cmd = command.name;
   console.log('SENT CMD:', cmd)
   var args = command.args;
   if(cmd === 'help') {
     if(!Object.keys(term_commands).length) return term.echo(i18n.t('misc.prompt.init')).id();
-    return term.echo(Object.entries(term_commands).map(([a, b]) => `"${b.cmd}" \u00bb "${b.description}"`).join('\n')).id();
+    return term.echo('\n' + Object.entries(term_commands).map(([a, b]) => `"${b.cmd}" \u00bb "${b.description}"`).join('\n') + '\n').id();
   }
   if (cmd === 'connect') {
 

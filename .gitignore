@@ -9,3 +9,6 @@ node_modules/
 
 # Ignore ZIPs
 *.zip
+
+# ESLint
+.eslintrc

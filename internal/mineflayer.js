@@ -7,13 +7,13 @@ const pathfinder = require('mineflayer-pathfinder').pathfinder;
 var moment = require('moment');
 require('moment-precise-range-plugin');
 
-var bot;
+var bot = null;
 
 var formatterRegistered = false;
 
 function startClient(options) {
 	bot = mineflayer.createBot(options);
-
+	
 	bot.lastOptions = options; // Used in the 'reconnect' module
 
 	bot.loadPlugin(pathfinder);
@@ -38,7 +38,6 @@ function startClient(options) {
 	var sessionStart, sessionEnd, sessionTimer, sessionRuntime;
 
 	bot.once('spawn', function() {
-		$('#runtime').removeClass('flash-red');
 		sessionStart = moment(Date.now());
 		term.set_prompt(`${bot.username} \u00bb `)
 
@@ -58,11 +57,12 @@ function startClient(options) {
 		}, 1000)
 	})
 
-	bot.once('end', function() {
+	bot.once('end', function(reason) {
+		if(chatLogger) chatLogger.end();
 		sessionTimer = clearInterval(sessionTimer);
+		term.echo(i18n.t('events.end', { username: options.username, reason: reason, runtime: sessionRuntime }));
 		$('#footer-left').text(i18n.t('footer.left.end', { bot: bot, runtime: sessionRuntime }))
 		$('#footer-right').text(i18n.t('footer.right.end', { bot: bot, runtime: sessionRuntime }))
-		$('#runtime').addClass('flash-red');
 	})
 
 	bot.on('title', function(title) {
@@ -119,11 +119,6 @@ function startClient(options) {
     	term.echo(i18n.t('events.chat', { bot: bot, group: group, tag: tag, username: username, suffix: suffix, message: message }));
     	chatLogger.write(i18n.t('logger.chat.format', { bot: bot, group: group, tag: tag, username: username, suffix: suffix, message: message }), 'utf-8', {flags: 'a'});
     })
-
-    bot.on('end', function(reason) {
-    	if(chatLogger) chatLogger.end();
-    	term.echo(i18n.t('events.end', { username: options.username, reason: reason }));
-    });
 
 }
 

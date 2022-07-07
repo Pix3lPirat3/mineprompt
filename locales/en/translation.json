@@ -11,7 +11,7 @@
     "death": "[Death] You died..",
     "playerSpawn": "[PlayerSpawn] I see {{player.username}}, they are {{distance}} blocks away",
     "playerGone": "[PlayerSpawn] I no longer see {{player.username}}, they were {{distance}} blocks away",
-    "end": "[End] {{username}}'s connection ended:\n[[;#FF5555;]{{reason}}]",
+    "end": "\n[End]\n\n[[;#FF5555;]Session Ended]\n{{username}}'s connection ended: [[;#FF5555;]{{reason}}]\nSession Runtime: [[;goldenrod;]{{runtime}}]\n",
     "error": "[Error] There was a client error:\n[[;#FF5555;]{{reason}}]",
     "kicked": "[Kicked] The client was kicked:\n[[;#FF5555;]{{reason}}]"
   },
