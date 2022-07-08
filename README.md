@@ -34,6 +34,12 @@ or
 npm run start
 ```
 
+### Planned Features
+
+- [ ] Settings Command `settings developer.openConsole true`
+- [ ] Discord Addon
+- [ ] Translations System *(A way for addons to register messages)*
+
 ### License
 
 This project uses the [MIT](https://github.com/Pix3lPirat3/mineprompt/blob/main/LICENSE) license.

@@ -7,37 +7,18 @@ module.exports = function(bot) {
     cmd: 'mine',
     aliases: ['break'],
     usage: 'mine',
-    
     description: 'Mines the block in front of the player',
     handler: handler
   };
 
-  var running = false;
-  var shouldStop = false;
-
   async function handler(sender, args) {
-  	if(running) {
-  		shouldStop = true;
-  	}
-  	running = true;
-
     async function dig() {
-   		if(shouldStop) {
-   			running = false;
-   			shouldStop = false;
-   			return;
-   		}
-      var pickaxes = bot.inventory.items().filter(i => i.name.includes('pickaxe') && getRemainingDurability(i) > 10);
 
-
-
-      // Eat
       await utils.eat()
 
-      // End Eat
-
+      var pickaxes = bot.inventory.items().filter(i => i.name.includes('pickaxe') && getRemainingDurability(i) > 10);
       if (bot.food < 2) process.exit(); // I don't want the bot to starve to death..
-      if (!pickaxes.length) return utils.notify('Miner Task', 'I have 0 viable pickaxes left.')
+      if (!pickaxes.length) return;
 
       if(!pickaxes.includes(bot.heldItem)) await bot.equip(pickaxes[0])
 
