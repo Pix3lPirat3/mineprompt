@@ -38,6 +38,7 @@ npm run start
 
 - [ ] Settings Command `settings developer.openConsole true`
 - [ ] Discord Addon
+- [ ] Redo Addon System
 - [ ] Translations System *(A way for addons to register messages)*
 
 ### License
