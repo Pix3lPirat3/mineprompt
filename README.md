@@ -34,10 +34,14 @@ or
 npm run start
 ```
 
+### Reload Warning
+
+Using the `reload` command reloads the **commands system (only)** by reading and loading the command files into memory. This may cause issues with any events registered in command listeners.
+
 ### Planned Features
 
 - [ ] Settings Command `settings developer.openConsole true`
-- [ ] Discord Addon
+- [ ] Discord Addon (+ implement handling multiple programs open)
 - [ ] Translations System *(A way for addons to register messages)*
 
 ### License
