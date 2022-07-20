@@ -1,6 +1,5 @@
 var appVersion = require('../package.json').version;
 
-//var ul;
 var term_commands = {};
 
 function echo(path, objects) {
