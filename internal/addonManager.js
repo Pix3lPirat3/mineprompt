@@ -47,6 +47,10 @@ module.exports = {
     let command_files = this.getFiles('commands');
     command_files.forEach(function(addon) {
       try {
+        
+        // Removes the cache'd file, so it can be required again
+        delete require.cache[require.resolve(`${__dirname}/../addons/commands/${addon}`)];
+
         let mineprompt_addon = require(`${__dirname}/../addons/commands/${addon}`);
         var cmd = mineprompt_addon.addon.cmd;
         if(term_commands[cmd]) return echo(`[[;#FF5555;]Error] [[;#777777;]\u00bb] There was a repeated command "[[;#FF5555;]${cmd}]" in file "[[;#FF5555;]${addon}]"`);
@@ -56,6 +60,7 @@ module.exports = {
         console.log(`Unable to load the command file "${addon}", skipping it:\n`, e);
       }
     });
+
   },
 
   getListeners: function() {
