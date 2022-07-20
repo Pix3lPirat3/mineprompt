@@ -10,6 +10,8 @@ module.exports = {
   addon: {
     cmd: 'nearby',
     aliases: ['near'],
+    args: ['players', 'passive', 'hostile', 'mobs'],
+    autocomplete: ['args', 'players'],
     usage: 'nearby',
     description: 'Show nearby players.',
     handler: handler

@@ -57,11 +57,13 @@ var term = $('#terminal').terminal(function(input) {
         var merged = [].concat.apply([], arrays);
 
         list = list.concat(merged)
-      } else if (command.match(/\s/)) {
-        if (term_commands[name]) {
-          // auto complete for command args, also bot.players's (TODO: Option to add autocomplete: ['players'] to addons)
-          list = term_commands[name].args || [];
-          list = (bot && bot.players) ? list.concat(Object.keys(bot.players)) : [] // Add players to list of arguments (Should we make this a command option ?)
+      } else if (command.match(/\s/)) { // There was a space, autocomplete args
+
+        // Grab the matched command
+        var cmd_object = Object.entries(term_commands).filter(([a, b]) => b.aliases?.includes(name) || b.cmd === name)[0]?.[1];
+        if(cmd_object) {
+          if(cmd_object.autocomplete?.includes('args')) list = list.concat(cmd_object.args);
+          if(cmd_object.autocomplete?.includes('players') && bot?.players) list = list.concat(Object.keys(bot.players));
         }
       }
       resolve(list);
