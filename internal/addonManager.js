@@ -1,35 +1,71 @@
 var fs = require('fs');
 
-var command_files = fs.readdirSync(`${__dirname}/../addons`).filter(file => file.endsWith('.js'));
+module.exports = {
 
-//console.log('command_files:', command_files)
+  getCommands: function() {
 
-module.exports = function(bot) {
-
-  bot.commander = {
-    options: {
-      prefix: '!'
-    },
-    masters: ['Pix3lSlime'], // Used to set who can use commands, default is EVERYONE
-    commands: []
-  }
-
-  bot.commander.load = function(files) {
-    if (!files || files === 'all') {
-
-      for (var a = 0; a < command_files.length; a++) {
-      	//console.log(`Grabbing: ${__dirname}/../addons/${command_files[a]}`)
-        var cmd = require(`${__dirname}/../addons/${command_files[a]}`)(bot);
-        if(cmd.type !== 'command') {
-        	echo(`The file '${command_files[a]}' is not a command, ignoring.`);
-        	continue;
+    // Default Commands
+    term_commands = {
+      connect: {
+        cmd: 'connect',
+        aliases: ['conn'],
+        usage: 'connect <username> <server:port> [version]',
+        description: 'Connect to a server',
+        handler: function(sender, args) {
+          if(!args || args.length <= 1) return echo(i18n.t('misc.prompt.init'));
+          var host = args[1].split(':');
+          var options = {
+            username: args[0],
+            host: host[0],
+            port: host.length ? host[1] : 25565,
+            version: args[2] || '1.18.2',
+            auth: 'microsoft'
+          };
+          startClient(options);
+          return;
         }
-        term_commands[cmd.cmd] = cmd;
-        bot.commander.commands.push(cmd);
-        echo(i18n.t('misc.addonManager.loaded', { cmd: cmd }));
+      },
+      reload: {
+        cmd: 'reload',
+        description: 'Reload the command system',
+        handler: function(sender, args) {
+          echo(`\n[[;#FFA500;]Reload] [[;#777777;]\u00bb] Reloading the command manager..`);
+          echo(`[[;#FFA500;]Warning] [[;#777777;]\u00bb] This may cause issues with event listeners.. ([[!;;;;https://github.com/Pix3lPirat3/mineprompt#reload-warning]Wiki])\n`);
+          return commander.getCommands();
+        }
+      },
+      help: {
+        cmd: 'help',
+        description: 'Display the help menu',
+        handler: function() {
+          if(!bot?.entity) return echo(i18n.t('misc.prompt.init'));
+          return echo('\n[[;#FFA500;]MinePrompt Commands:]\n' + Object.entries(term_commands).map(([a, b]) => `"${b.cmd}" \u00bb "${b.description}"`).join('\n') + '\n');
+        }
       }
+    }; // Reset the term_commands object, prevent duplicates, and incase command files are removed
 
-    }
+    let command_files = this.getFiles('commands');
+    command_files.forEach(function(addon) {
+      try {
+        let mineprompt_addon = require(`${__dirname}/../addons/commands/${addon}`);
+        var cmd = mineprompt_addon.addon.cmd;
+        if(term_commands[cmd]) return echo(`[[;#FF5555;]Error] [[;#777777;]\u00bb] There was a repeated command "[[;#FF5555;]${cmd}]" in file "[[;#FF5555;]${addon}]"`);
+        term_commands[cmd] = mineprompt_addon.addon;
+      } catch(e) {
+        echo(`[[;#FF5555;]Error] [[;#777777;]\u00bb] Unable to load the command file "[[;#FF5555;]${addon}]", skipping it.. [[;#FFA500;](Check Console)]`);
+        console.log(`Unable to load the command file "${addon}", skipping it:\n`, e);
+      }
+    });
+  },
+
+  getListeners: function() {
+    // TODO : Implement when needed
+  },
+
+  getFiles: function(type) {
+    let dir = `${__dirname}/../addons/${type}`;
+    let files = fs.readdirSync(`${__dirname}/../addons/${type}`).filter(file => file.endsWith('.js'));
+    return files;
   }
 
 }

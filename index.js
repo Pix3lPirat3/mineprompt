@@ -1,5 +1,5 @@
 // main.js
-process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
@@ -24,6 +24,13 @@ const createWindow = () => {
   // and load the index.html of the app.
   mainWindow.loadFile('window/index.html')
 
+  mainWindow.webContents.on('before-input-event', (event, input) => {
+    if (input.control && input.shift && input.key.toLowerCase() === 'i') {
+      event.preventDefault()
+      mainWindow.webContents.openDevTools()
+    }
+  })
+
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
 }
@@ -39,6 +46,7 @@ app.whenReady().then(() => {
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
+
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common

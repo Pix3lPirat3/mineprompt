@@ -25,7 +25,7 @@
   },
   "misc": {
     "prompt": {
-      "init": "Connect to a server using \"[[;goldenrod;]connect <username> <server:port> [version&#93;]\""
+      "init": "Connect to a server using \"[[;goldenrod;]connect <username> <server:port> [version&#93;]\"\n"
     },
     "chat": {
       "highlight": "[[;goldenrod;]{{username}}]"

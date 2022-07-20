@@ -1,5 +1,4 @@
 var mineflayer = require('mineflayer');
-const fs = require('fs');
 
 const Movements = require('mineflayer-pathfinder').Movements;
 const pathfinder = require('mineflayer-pathfinder').pathfinder;
@@ -11,13 +10,21 @@ var bot = null;
 
 var formatterRegistered = false;
 
+// Set everything in "commander" then load via bot.commander.<property>
+var commander = require('../internal/addonManager');
+commander.getCommands();
+
 function startClient(options) {
+
+	echo(`\n[[;#FFA500;]Connect] [[;#777777;]\u00bb] Connecting [[;#FFA500;]${options.username}] to [[;#FFA500;]${options.host}]..\n`)
+
 	bot = mineflayer.createBot(options);
 	
 	bot.lastOptions = options; // Used in the 'reconnect' module
 
 	bot.loadPlugin(pathfinder);
 
+	// TODO: Disable building/breaking by default
 	var defaultMove = new Movements(bot, bot.registry);
 	bot.pathfinder.setMovements(defaultMove);
 
@@ -28,8 +35,8 @@ function startClient(options) {
 		echo(i18n.t('events.kicked', { reason: reason }));
 	})
 
-  bot.loadPlugin(require('../internal/addonManager.js'))
-  bot.commander.load()
+  //bot.loadPlugin(require('../internal/addonManager.js'))
+  //bot.commander.load()
 
 	bot.on('spawn', function() {
 		echo(i18n.t('events.spawn', { bot: bot, pos: bot.entity.position.floored() }));
@@ -58,6 +65,7 @@ function startClient(options) {
 	})
 
 	bot.once('end', function(reason) {
+		bot.entity = null;
 		if(chatLogger) chatLogger.end();
 		sessionTimer = clearInterval(sessionTimer);
 		echo(i18n.t('events.end', { username: options.username, reason: reason, runtime: sessionRuntime }));

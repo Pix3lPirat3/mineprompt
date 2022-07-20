@@ -1,6 +1,6 @@
 {
   "name": "mineprompt",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "discord.js": "^13.8.1",
     "i18next": "^21.8.11",
     "i18next-electron-fs-backend": "^2.0.0",
     "i18next-fs-backend": "^1.1.4",
@@ -18,7 +19,8 @@
     "mineflayer-pathfinder": "^2.2.0",
     "moment": "^2.29.3",
     "moment-precise-range-plugin": "^1.3.0",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "sound-play": "^1.1.0"
   },
   "devDependencies": {
     "electron": "^19.0.6"
