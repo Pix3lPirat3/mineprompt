@@ -4,16 +4,16 @@ var term_commands = {};
 
 function echo(path, objects) {
   var msg = i18n.t(path, objects);
-  if(!msg.length) return console.log(`[Warn] Lang path "${path}" failed..`);
+  if (!msg.length) return console.log(`[Warn] Lang path "${path}" failed..`);
   term.echo(msg);
 }
 
 var term = $('#terminal').terminal(function(input) {
-  if(input.length === 0) return;
+  if (input.length === 0) return;
   var command = $.terminal.parse_command(input);
   var cmd = command.name;
   var args = command.args;
-  
+
   var cmd_object = Object.entries(term_commands).filter(([a, b]) => b.cmd === cmd || b.aliases?.includes(cmd))?.[0]?.[1];
 
   if (!cmd_object) return echo(i18n.t('commands.unknown_command'));
@@ -23,7 +23,7 @@ var term = $('#terminal').terminal(function(input) {
   prompt: 'MinePrompt \u00bb ',
   autocompleteMenu: true,
   greetings: function() {
-        return `
+    return `
   __  __ _            ____            v ${appVersion}         _   
  |  \\/  (_)_ __   ___|  _ \\ _ __ ___  _ __ ___  _ __ | |_ 
  | |\\/| | | '_ \\ / _ \\ |_) | '__/ _ \\| '_ ' _ \\| '_ \\| __|
@@ -47,7 +47,7 @@ var term = $('#terminal').terminal(function(input) {
       var command = term.get_command();
       var name = command.match(/^([^\s]*)/)[0];
       var list = [];
-      if(!name) resolve(list);
+      if (!name) resolve(list);
       var word = term.before_cursor(true);
       var regex = new RegExp('^' + $.terminal.escape_regex(word));
       if (name == word) {
@@ -61,13 +61,12 @@ var term = $('#terminal').terminal(function(input) {
 
         // Grab the matched command
         var cmd_object = Object.entries(term_commands).filter(([a, b]) => b.aliases?.includes(name) || b.cmd === name)[0]?.[1];
-        if(cmd_object) {
-          if(cmd_object.autocomplete?.includes('args')) list = list.concat(cmd_object.args);
-          if(cmd_object.autocomplete?.includes('players') && bot?.players) list = list.concat(Object.keys(bot.players));
+        if (cmd_object) {
+          if (cmd_object.autocomplete?.includes('args')) list = list.concat(cmd_object.args);
+          if (cmd_object.autocomplete?.includes('players') && bot?.players) list = list.concat(Object.keys(bot.players));
         }
       }
       resolve(list);
     });
   }
 });
-

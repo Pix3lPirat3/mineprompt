@@ -12,7 +12,7 @@ module.exports = {
         usage: 'connect <username> <server:port> [version]',
         description: 'Connect to a server',
         handler: function(sender, args) {
-          if(!args || args.length <= 1) return echo(i18n.t('misc.prompt.init'));
+          if (!args || args.length <= 1) return echo(i18n.t('misc.prompt.init'));
           var host = args[1].split(':');
           var options = {
             username: args[0],
@@ -38,7 +38,7 @@ module.exports = {
         cmd: 'help',
         description: 'Display the help menu',
         handler: function() {
-          if(!bot?.entity) return echo(i18n.t('misc.prompt.init'));
+          if (!bot?.entity) return echo(i18n.t('misc.prompt.init'));
           return echo('\n[[;#FFA500;]MinePrompt Commands:]\n' + Object.entries(term_commands).map(([a, b]) => `"${b.cmd}" \u00bb "${b.description}"`).join('\n') + '\n');
         }
       }
@@ -47,15 +47,15 @@ module.exports = {
     let command_files = this.getFiles('commands');
     command_files.forEach(function(addon) {
       try {
-        
+
         // Removes the cache'd file, so it can be required again
         delete require.cache[require.resolve(`${__dirname}/../addons/commands/${addon}`)];
 
         let mineprompt_addon = require(`${__dirname}/../addons/commands/${addon}`);
         var cmd = mineprompt_addon.addon.cmd;
-        if(term_commands[cmd]) return echo(`[[;#FF5555;]Error] [[;#777777;]\u00bb] There was a repeated command "[[;#FF5555;]${cmd}]" in file "[[;#FF5555;]${addon}]"`);
+        if (term_commands[cmd]) return echo(`[[;#FF5555;]Error] [[;#777777;]\u00bb] There was a repeated command "[[;#FF5555;]${cmd}]" in file "[[;#FF5555;]${addon}]"`);
         term_commands[cmd] = mineprompt_addon.addon;
-      } catch(e) {
+      } catch (e) {
         echo(`[[;#FF5555;]Error] [[;#777777;]\u00bb] Unable to load the command file "[[;#FF5555;]${addon}]", skipping it.. [[;#FFA500;](Check Console)]`);
         console.log(`Unable to load the command file "${addon}", skipping it:\n`, e);
       }

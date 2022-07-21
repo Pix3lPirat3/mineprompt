@@ -16,7 +16,7 @@
     "kicked": "[Kicked] The client was kicked:\n[[;#FF5555;]{{reason}}]"
   },
   "commands": {
-    "unknown_command": "[[;#FF5555;]Unknown command. Type \"help\" for help.]" 
+    "unknown_command": "[[;#FF5555;]Unknown command. Type \"help\" for help.]"
   },
   "logger": {
     "chat": {

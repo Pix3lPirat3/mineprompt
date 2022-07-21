@@ -1,5 +1,5 @@
 function handler(sender, args) {
-    
+
 }
 
 module.exports = {

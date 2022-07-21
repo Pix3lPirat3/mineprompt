@@ -19,7 +19,7 @@ function startClient(options) {
 	echo(`\n[[;#FFA500;]Connect] [[;#777777;]\u00bb] Connecting [[;#FFA500;]${options.username}] to [[;#FFA500;]${options.host}]..\n`)
 
 	bot = mineflayer.createBot(options);
-	
+
 	bot.lastOptions = options; // Used in the 'reconnect' module
 
 	bot.loadPlugin(pathfinder);
@@ -35,8 +35,8 @@ function startClient(options) {
 		echo(i18n.t('events.kicked', { reason: reason }));
 	})
 
-  //bot.loadPlugin(require('../internal/addonManager.js'))
-  //bot.commander.load()
+	//bot.loadPlugin(require('../internal/addonManager.js'))
+	//bot.commander.load()
 
 	bot.on('spawn', function() {
 		echo(i18n.t('events.spawn', { bot: bot, pos: bot.entity.position.floored() }));
@@ -50,10 +50,10 @@ function startClient(options) {
 
 		// Highlight the player's name when mentioned in chat (Optional: sound)
 
-		if(!formatterRegistered) {
-	    $.terminal.new_formatter(function(string, options) {
-	      if (options.echo) return string.replace(new RegExp(bot.username || 'NULL', 'gi'), i18n.t('misc.chat.highlight', { username: bot.username || 'NULL' }));
-	    });
+		if (!formatterRegistered) {
+			$.terminal.new_formatter(function(string, options) {
+				if (options.echo) return string.replace(new RegExp(bot.username || 'NULL', 'gi'), i18n.t('misc.chat.highlight', { username: bot.username || 'NULL' }));
+			});
 		}
 
 		sessionTimer = setInterval(function() {
@@ -66,7 +66,7 @@ function startClient(options) {
 
 	bot.once('end', function(reason) {
 		bot.entity = null;
-		if(chatLogger) chatLogger.end();
+		if (chatLogger) chatLogger.end();
 		sessionTimer = clearInterval(sessionTimer);
 		echo(i18n.t('events.end', { username: options.username, reason: reason, runtime: sessionRuntime }));
 		$('#footer-left').text(i18n.t('footer.left.end', { bot: bot, runtime: sessionRuntime }))
@@ -86,47 +86,47 @@ function startClient(options) {
 	})
 
 	bot.on('entitySpawn', function(e) {
-		if(e.type !== 'player' || e.username === bot.username) return;
+		if (e.type !== 'player' || e.username === bot.username) return;
 		var distance = Math.floor(bot.entity.position.distanceTo(e.position));
 		echo(i18n.t('events.playerSpawn', { player: e, distance: distance }))
 	})
 
 	bot.on('entityGone', function(e) {
-		if(e.type !== 'player' || e.username === bot.username) return;
+		if (e.type !== 'player' || e.username === bot.username) return;
 		var distance = Math.floor(bot.entity.position.distanceTo(e.position));
 		echo(i18n.t('events.playerGone', { player: e, distance: distance }))
 	});
 
 	// Chat Listener
-	var chatPattern = /^(?:\[?(.*?)?\])?\s?(?:\[?(.*?)?\])?\s?([A-Za-z0-9_][^\s]*)\s?(?:\[?(.*?)?\])?\s?(?::|»|>>) (.*)/ 
-    bot.on('messagestr', function(message) {
-      if(!chatPattern.test(message)) {
-      	echo(i18n.t('events.messagestr', { message: message }))
-        return;
-      }
-      var parts = chatPattern.exec(message);
+	var chatPattern = /^(?:\[?(.*?)?\])?\s?(?:\[?(.*?)?\])?\s?([A-Za-z0-9_][^\s]*)\s?(?:\[?(.*?)?\])?\s?(?::|»|>>) (.*)/
+	bot.on('messagestr', function(message) {
+		if (!chatPattern.test(message)) {
+			echo(i18n.t('events.messagestr', { message: message }))
+			return;
+		}
+		var parts = chatPattern.exec(message);
 
-      var group = parts[1];
-      var tag = parts[2];
-      var displayname = parts[3];
-      var suffix = parts[4];
-      var message = parts[5];
+		var group = parts[1];
+		var tag = parts[2];
+		var displayname = parts[3];
+		var suffix = parts[4];
+		var message = parts[5];
 
-      bot.emit('chat:formatted', group, tag, displayname, suffix, message);
+		bot.emit('chat:formatted', group, tag, displayname, suffix, message);
 
-    })
+	})
 
-    var dateMonthDayYear = new Date().toLocaleString().split(',')[0].replaceAll('/', '-'); // M-DD-YYYY
-		let chatLogger; // Opened once chat is spoken, saves on files and memory.
+	var dateMonthDayYear = new Date().toLocaleString().split(',')[0].replaceAll('/', '-'); // M-DD-YYYY
+	let chatLogger; // Opened once chat is spoken, saves on files and memory.
 
-    bot.on('chat:formatted', function(group, tag, username, suffix, message) {
-    	if(!chatLogger) chatLogger = fs.createWriteStream(`chat-${dateMonthDayYear}.logs`, { flags: 'a', encoding: 'UTF-8' }); // Only open if needed
+	bot.on('chat:formatted', function(group, tag, username, suffix, message) {
+		if (!chatLogger) chatLogger = fs.createWriteStream(`chat-${dateMonthDayYear}.logs`, { flags: 'a', encoding: 'UTF-8' }); // Only open if needed
 
-    	message = message.replaceAll('§', ''); // Remove the Minecraft (Minecraft uses § in the backend) color codes from the message
+		message = message.replaceAll('§', ''); // Remove the Minecraft (Minecraft uses § in the backend) color codes from the message
 
-    	echo(i18n.t('events.chat', { bot: bot, group: group, tag: tag, username: username, suffix: suffix, message: message }));
-    	chatLogger.write(i18n.t('logger.chat.format', { bot: bot, group: group, tag: tag, username: username, suffix: suffix, message: message }), 'UTF-8');
-    })
+		echo(i18n.t('events.chat', { bot: bot, group: group, tag: tag, username: username, suffix: suffix, message: message }));
+		chatLogger.write(i18n.t('logger.chat.format', { bot: bot, group: group, tag: tag, username: username, suffix: suffix, message: message }), 'UTF-8');
+	})
 
 }
 

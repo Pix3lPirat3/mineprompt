@@ -38,7 +38,25 @@ const createWindow = () => {
   });
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
+  function openDevTools() {
+    let devtools = new BrowserWindow({ show: false });
+    mainWindow.webContents.setDevToolsWebContents(devtools.webContents);
+    mainWindow.webContents.openDevTools({ mode: 'detach' });
+    mainWindow.webContents.once('did-finish-load', function() {
+      var windowBounds = mainWindow.getBounds();
+      devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
+      devtools.setSize(windowBounds.width / 2, windowBounds.height);
+      devtools.show();
+    });
+
+    mainWindow.on('move', function() {
+      var windowBounds = mainWindow.getBounds();
+      devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
+    });
+  }
+  openDevTools();
+
 }
 
 // This method will be called when Electron has finished
