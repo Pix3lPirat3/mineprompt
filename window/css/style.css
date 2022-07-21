@@ -1,0 +1,53 @@
+body {
+  height: 100%;
+  margin: 0;
+}
+
+#terminal {
+  height: 100%;
+  min-width: 100%;
+  overflow-y: hidden;
+}
+
+.box {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.box .row.content {
+  flex: 1 1 auto;
+}
+
+.box .row.footer {
+  flex: 0 1 40px;
+}
+
+.cmd a[href]:not(.terminal-inverted),
+.terminal .terminal-output>:not(.raw) a[href]:not(.terminal-inverted),
+.terminal.external a[href]:not(.terminal-inverted) {
+  --link-color: steelblue;
+  --color: var(--link-color);
+  text-shadow: 0 0 calc(var(--glow)*5px) var(--color, #ccc);
+  text-decoration: none;
+}
+
+.footer {
+  background-color: black;
+  color: #757575;
+  padding: 5px;
+  border-top: 1px solid #353535;
+}
+
+.footer-left {
+  float: left;
+}
+
+.footer-right {
+  float: right;
+  padding: 0;
+}
+
+.footer ul li {
+  display: inline;
+}

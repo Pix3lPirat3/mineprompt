@@ -1,6 +1,11 @@
 // main.js
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
+var fs = require('fs');
+var settings = JSON.parse(fs.readFileSync('./internal/settings.json'));
+
+console.log(settings)
+
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, shell } = require('electron');
 const path = require('path');
@@ -55,7 +60,7 @@ const createWindow = () => {
       devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
     });
   }
-  openDevTools();
+  if(settings.devtools) openDevTools();
 
 }
 
