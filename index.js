@@ -38,28 +38,22 @@ const createWindow = () => {
   mainWindow.webContents.on('before-input-event', (event, input) => {
     if (input.control && input.shift && input.key.toLowerCase() === 'i') {
       event.preventDefault();
-      mainWindow.webContents.openDevTools();
+      openDevTools();
     }
   });
 
   // Open the DevTools.
   //mainWindow.webContents.openDevTools();
   function openDevTools() {
-    let devtools = new BrowserWindow({ show: false });
+    let devtools = new BrowserWindow({ show: false, width: 350, height: 500 });
     mainWindow.webContents.setDevToolsWebContents(devtools.webContents);
     mainWindow.webContents.openDevTools({ mode: 'detach' });
-    mainWindow.webContents.once('did-finish-load', function() {
+      if(!devtools) return;
       var windowBounds = mainWindow.getBounds();
       devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
-      devtools.setSize(windowBounds.width / 2, windowBounds.height);
       devtools.show();
-    });
-
-    mainWindow.on('move', function() {
-      var windowBounds = mainWindow.getBounds();
-      devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
-    });
   }
+
   if(settings.devtools) openDevTools();
 
 }

@@ -37,13 +37,14 @@ body {
   color: #757575;
   padding: 5px;
   border-top: 1px solid #353535;
+  display: block;
 }
 
-.footer-left {
+#footer-left {
   float: left;
 }
 
-.footer-right {
+#footer-right {
   float: right;
   padding: 0;
 }

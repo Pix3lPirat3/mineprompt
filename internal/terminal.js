@@ -2,9 +2,7 @@ var appVersion = require('../package.json').version;
 
 var term_commands = {};
 
-function echo(path, objects) {
-  var msg = i18n.t(path, objects);
-  if (!msg.length) return console.log(`[Warn] Lang path "${path}" failed..`);
+function echo(msg) {
   term.echo(msg);
 }
 
@@ -16,7 +14,7 @@ var term = $('#terminal').terminal(function(input) {
 
   var cmd_object = Object.entries(term_commands).filter(([a, b]) => b.cmd === cmd || b.aliases?.includes(cmd))?.[0]?.[1];
 
-  if (!cmd_object) return echo(i18n.t('commands.unknown_command'));
+  if (!cmd_object) return echo('[[;#FF5555;]Unknown command. Type "help" for help.]');
   cmd_object.handler('CONSOLE', args);
 }, {
   name: 'mineprompt',
@@ -33,7 +31,9 @@ var term = $('#terminal').terminal(function(input) {
     `;
   },
   onInit: function(term) {
-    term.echo(i18n.t('misc.prompt.init'));
+    term.echo('Connect to a server using \"[[;goldenrod;]connect <username> <server:port> [version&#93;]\"\n');
+    $('#footer-left').html(`MinePrompt v${appVersion} by <a href="#" style="color: steelblue; text-decoration: none;" target="_blank">Pix3lPirat3#3858</a>`);
+    $('#footer-right').html(`<a href="http://mineprompt.com" style="color: steelblue; text-decoration: none;" target="_blank">Documentation</a>`);
   },
   keymap: {
     "CTRL+R": function() {

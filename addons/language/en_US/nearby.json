@@ -1,0 +1,6 @@
+{
+  "no_bot": "[Nearby] There is no bot entity to search around..",
+  "no_entities_nearby": "There are no {type} nearby..",
+  "distance_map": "{name} ({distance}m)",
+  "distance_msg": "[Nearby] Nearby {type}: {map}"
+}
