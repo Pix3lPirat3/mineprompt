@@ -1,7 +1,6 @@
 module.exports = {
   addon: {
     cmd: 'follow',
-    //aliases: ['near'],
     args: ['nearest', 'stop'],
     autocomplete: ['players', 'args'],
     usage: 'follow <player | nearest>',
