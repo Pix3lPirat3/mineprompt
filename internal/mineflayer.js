@@ -126,6 +126,3 @@ function startClient(options) {
 function loadAddons() {
 
 }
-
-
-//startClient({ host: 'localhost', port: 25565, username: 'Pix3lPirat3', version: '1.18.2', auth: 'microsoft' })
