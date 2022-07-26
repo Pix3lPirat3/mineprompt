@@ -44,7 +44,7 @@ Using the `reload` command reloads the **commands system and language files (onl
 
 - [ ] Settings Command `settings developer.openConsole true`
 - [ ] Discord Addon (+ implement handling multiple programs open)
-- [ ] Translations System *(A way for addons to register messages)*
+- [x] Translations System *(A way for addons to register messages)*
 
 ### License
 
