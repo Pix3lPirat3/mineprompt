@@ -8,11 +8,11 @@ module.exports = {
     description: 'Show nearby players or mobs.',
     useLanguage: true,
     handler: function(sender, args) {
-      //let lang = this.lang;
-      if (!bot?.entity) return echo(this.lang.no_bot);
+      let lang = this.lang;
+      if (!bot?.entity) return echo(lang.no_bot);
       let type = args[0]?.toLowerCase() || 'players';
 
-      if(!this.args.includes(type)) return echo(this.lang.unknown_target.replace('{target}', type));
+      if(!this.args.includes(type)) return echo(lang.unknown_target.replace('{target}', type));
 
       let distanceMap = getNearby(type);
       if (!distanceMap.length) return echo(lang.no_entities_nearby.replaceAll('{type}', type));
@@ -25,18 +25,14 @@ module.exports = {
         switch(type) {
           case 'mobs':
             map = Object.values(bot.entities).filter(e => e.type === 'mob');
-            mapMsg = map.map(e => lang.distance_map.replaceAll('{name}', e.mobType).replaceAll('{distance}', Math.floor(bot.entity.position.distanceTo(e.position))));
             break;
           case 'players':
           default:
             map = Object.values(bot.entities).filter(e => e.type === 'player' && e.username !== bot.username);
-            mapMsg = map.map(e => lang.distance_map.replaceAll('{name}', e.username).replaceAll('{distance}', Math.floor(bot.entity.position.distanceTo(e.position))));
             break;
         }
-
-        map = map.reverse();
-        return mapMsg;
-
+        map = map.sort((a, b) => bot.entity.position.distanceTo(a.position) - bot.entity.position.distanceTo(b.position));
+        return map.map(e => lang.distance_map.replaceAll('{name}', e.username || e.mobType).replaceAll('{distance}', Math.floor(bot.entity.position.distanceTo(e.position))));
       }
     }
   }

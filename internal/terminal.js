@@ -62,6 +62,7 @@ var term = $('#terminal').terminal(function(input) {
         // Grab the matched command
         var cmd_object = Object.entries(term_commands).filter(([a, b]) => b.aliases?.includes(name) || b.cmd === name)[0]?.[1];
         if (cmd_object) {
+          // If there is a command object, grab it's tab-completeable arguments
           if (cmd_object.autocomplete?.includes('args')) list = list.concat(cmd_object.args);
           if (cmd_object.autocomplete?.includes('players') && bot?.players) list = list.concat(Object.keys(bot.players));
         }

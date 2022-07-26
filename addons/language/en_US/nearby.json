@@ -1,6 +1,6 @@
 {
   "no_bot": "[Nearby] There is no bot entity to search around..",
-  "no_entities_nearby": "There are no {type} nearby..",
-  "distance_map": "{name} ({distance}m)",
+  "no_entities_nearby": "[Nearby] Nearby {type}: [[;#FF5555;]NaN]",
+  "distance_map": "[[;goldenrod;]{name}] [[;#AAAAAA;]({distance}m)]",
   "distance_msg": "[Nearby] Nearby {type}: {map}"
 }
