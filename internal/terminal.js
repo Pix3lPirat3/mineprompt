@@ -31,7 +31,7 @@ var term = $('#terminal').terminal(function(input) {
     `;
   },
   onInit: function(term) {
-    term.echo('Connect to a server using \"[[;goldenrod;]connect <username> <server:port> [version&#93;]\"\n');
+    term.echo('Connect [[;#777777;]\u00bb] \"[[;goldenrod;]connect <username> <server:port> [version&#93; [offline&#93;]\"\n');
     $('#footer-left').html(`MinePrompt v${appVersion} by <a href="#" style="color: steelblue; text-decoration: none;" target="_blank">Pix3lPirat3#3858</a>`);
     $('#footer-right').html(`<a href="http://mineprompt.com" style="color: steelblue; text-decoration: none;" target="_blank">Documentation</a>`);
   },

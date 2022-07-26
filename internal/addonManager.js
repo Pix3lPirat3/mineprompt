@@ -9,17 +9,19 @@ module.exports = {
       connect: {
         cmd: 'connect',
         aliases: ['conn'],
-        usage: 'connect <username> <server:port> [version]',
+        usage: 'connect <username> <server:port> [version] [offline]',
         description: 'Connect to a server',
         handler: function(sender, args) {
-          if (!args || args.length <= 1) return echo('Connect to a server using \"[[;goldenrod;]connect <username> <server:port> [version&#93;]\"\n');
+          if (!args || args.length <= 1) return echo('Connect [[;#777777;]\u00bb] \"[[;goldenrod;]connect <username> <server:port> [version&#93;  [offline&#93;]\"\n');
+          if(args[3] == true) echo(`[[;#FF5555;]Warning] [[;#777777;]\u00bb] Connecting without authentication..`)
           var host = args[1].split(':');
           var options = {
             username: args[0],
             host: host[0],
             port: host.length ? host[1] : 25565,
             version: args[2] || '1.18.2',
-            auth: 'microsoft'
+            auth: args[3] == true ? undefined : 'microsoft',
+            skipValidation: args[3] == true ? true : false
           };
           startClient(options);
           return;
@@ -38,7 +40,7 @@ module.exports = {
         cmd: 'help',
         description: 'Display the help menu',
         handler: function() {
-          if (!bot?.entity) return echo('Connect to a server using \"[[;goldenrod;]connect <username> <server:port> [version&#93;]\"\n');
+          if (!bot?.entity) return echo('Connect [[;#777777;]\u00bb] \"[[;goldenrod;]connect <username> <server:port> [version&#93; [offline&#93;]\"\n');
           return echo('\n[[;#FFA500;]MinePrompt Commands:]\n' + Object.entries(term_commands).map(([a, b]) => `"${b.cmd}" \u00bb "${b.description}"`).join('\n') + '\n');
         }
       }
