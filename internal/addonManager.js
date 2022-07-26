@@ -4,6 +4,8 @@ module.exports = {
 
   getCommands: function() {
 
+    if(bot) bot.pathfinder.stop();
+
     // Default Commands
     term_commands = {
       connect: {
