@@ -1,7 +1,7 @@
 var mineflayer = require('mineflayer');
 
 const Movements = require('mineflayer-pathfinder').Movements;
-const { GoalNear, GoalBlock, GoalXZ, GoalY, GoalInvert, GoalFollow, GoalBreakBlock } = require('mineflayer-pathfinder').goals;
+const { GoalNear, GoalNearXZ, GoalBlock, GoalXZ, GoalY, GoalInvert, GoalFollow, GoalBreakBlock } = require('mineflayer-pathfinder').goals;
 const pathfinder = require('mineflayer-pathfinder').pathfinder;
 
 var moment = require('moment');
@@ -35,9 +35,6 @@ function startClient(options) {
 	bot.on('kicked', function(reason) {
 		echo(`[Kicked] The client was kicked:\n[[;#FF5555;]${reason}]`);
 	})
-
-	//bot.loadPlugin(require('../internal/addonManager.js'))
-	//bot.commander.load()
 
 	bot.on('spawn', function() {
 		let pos = bot.entity.position.floored();
