@@ -39,7 +39,6 @@ module.exports = {
           }
       }
 
-      // x, z
       if(args.length === 2) {
           let pos = { x: args[0], z: args[1] };
           echo(lang.started.replace('{target}', Object.values(pos).map(i => Math.floor(i)).join(', ')))
@@ -50,8 +49,7 @@ module.exports = {
               return echo(lang.failed.replace('{target}', Object.values(pos).map(i => Math.floor(i)).join(', ')))
           }
       }
-
-      // x, y, z
+      
       if(args.length === 3) {
           let pos = { x: args[0], y: args[1], z: args[2] };
           echo(lang.started.replace('{target}', Object.values(pos).map(i => Math.floor(i)).join(', ')))
