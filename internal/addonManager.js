@@ -53,10 +53,8 @@ module.exports = {
 
         let mineprompt_addon = require(`${__dirname}/../addons/commands/${addon}`);
 
-        console.log('useLanguage:', mineprompt_addon.addon.useLanguage)
         if(mineprompt_addon.addon.useLanguage) {
           mineprompt_addon.addon.lang = JSON.parse(fs.readFileSync(`${__dirname}/../addons/language/${settings.language_code}/${addon.replace('js', 'json')}`)); // fs.getFileSync // getLanguage(settings.language_code); 
-          console.log('LANG:', mineprompt_addon.addon.lang.no_bot)
         }
 
         var cmd = mineprompt_addon.addon.cmd;

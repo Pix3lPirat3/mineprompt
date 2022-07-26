@@ -1,6 +1,7 @@
 var mineflayer = require('mineflayer');
 
 const Movements = require('mineflayer-pathfinder').Movements;
+const { GoalNear, GoalBlock, GoalXZ, GoalY, GoalInvert, GoalFollow, GoalBreakBlock } = require('mineflayer-pathfinder').goals;
 const pathfinder = require('mineflayer-pathfinder').pathfinder;
 
 var moment = require('moment');
