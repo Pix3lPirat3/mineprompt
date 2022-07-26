@@ -20,6 +20,8 @@ If you'd like support for using [Mineflayer](https://github.com/PrismarineJS/min
 
 ### Usage
 
+Usage Video: [Pix3lPirat3's Usage YouTube](https://www.youtube.com/watch?v=CK3QPQXZloQ&ab_channel=Pix3lPirat3)
+
 Create your copy of the repository on your system, go to the directory, then install the modules
 ```bash
 npm i
@@ -36,7 +38,7 @@ npm run start
 
 ### Reload Warning
 
-Using the `reload` command reloads the **commands system (only)** by reading and loading the command files into memory. This may cause issues with any events registered in command listeners.
+Using the `reload` command reloads the **commands system and language files (only)** by reading and loading the command files into memory. This may cause issues with any events registered in command listeners.
 
 ### Planned Features
 
