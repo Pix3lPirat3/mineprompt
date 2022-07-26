@@ -42,10 +42,20 @@ const createWindow = () => {
     }
   });
 
+  let devtools = null;
+
+  mainWindow.on('minimize', function() {
+    if(devtools && !devtools.isMinimized()) devtools.minimize();
+  })
+
+  // Window is restored from minimization
+  mainWindow.on('restore', function() {
+    if(devtools && devtools.isMinimized()) devtools.restore();
+  })
+
   // Open the DevTools.
-  //mainWindow.webContents.openDevTools();
   function openDevTools() {
-    let devtools = new BrowserWindow({ show: false, width: 350, height: 500 });
+    devtools = new BrowserWindow({ show: false, width: 350, height: 500 });
     mainWindow.webContents.setDevToolsWebContents(devtools.webContents);
     mainWindow.webContents.openDevTools({ mode: 'detach' });
       if(!devtools) return;
