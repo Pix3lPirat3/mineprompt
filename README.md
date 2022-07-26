@@ -46,6 +46,31 @@ Using the `reload` command reloads the **commands system and language files (onl
 - [ ] Discord Addon (+ implement handling multiple programs open)
 - [x] Translations System *(A way for addons to register messages)*
 
+### Commands
+*This list is not in any specific order*
+
+- [x] Nearby `nearby <players, mobs>`  (Get the nearby players / mobs)
+- [x] Follow `follow <player | stop>`  (Follow a player)
+- [x] Goto `goto <player | nearest | stop | xz | xyz>`  (Go to a player, or coordinates)
+- [ ] Settings `settings <settings.key> <value>`  (Set a value in the settings)
+- [ ] Inventory `inventory` (Show the player's inventory) 
+- [ ] Drop `drop <item | all> [amount]` (Drop items from inventory)
+- [ ] Collect `collect [item] [amount]` (Collect nearby items)
+- [ ] Harvest `harvest <block> [amount]` (Harvest nearby blocks)
+- [ ] Autoclicker `autoclicker <speed | start | stop> [jitter]` (Autoclicker - Jitter click (randomize position))
+- [ ] Equip `equip <item> [slot]` (Equip an item to hand, or armor to armor slots)
+- [ ] Mend `mend <item(s)>` (Equip items with mending in the offhand, once repaired switch and repeat)
+- [ ] Fish `fish [amount] [saveDurability]` (Fish, a specific amount, and whether to save durability or not)
+- [ ] Build `build <schematic> <location>` (Advanced command, will be a way-later-project, and definitely will have tons of flaws)
+- [ ] Eat `eat [item]` (Eat an item (sorted by food points), optionally specify an item)
+- [ ] Move `move <left|right|backwards|forwards|north|east|south|west> [amount]` (Move a specific amount of blocks in a direction)
+- [ ] AFK `afk <method>` (Use a specific method of anti-afk, such as left/right clicking, jumping, moving, and so on)
+- [ ] Farm `farm <crop> [time] [region]` (Farm a crop for an optional time, and in an optional region. Storage chests can be defined)
+- [ ] Quarry `quarry [depth]` (Quarry a chunk to a specific depth / Y coordinate)
+- [ ] Mineshaft `mineshaft <type> <distance/time>` (Create a mineshaft at current coordinates, branch mining)
+- [ ] Lookat `lookat <player|direction|block>` (Look at a specific player, direction, or block)
+- [ ] Generator `generator [saveDurability] [switchTools] [mendingOnly]` (Stationary mining, e.g. cobblestone generators)
+
 ### License
 
 This project uses the [MIT](https://github.com/Pix3lPirat3/mineprompt/blob/main/LICENSE) license.
