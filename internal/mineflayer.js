@@ -1,4 +1,5 @@
 var mineflayer = require('mineflayer');
+var utils = require('./../utils.js');
 
 const Movements = require('mineflayer-pathfinder').Movements;
 const { GoalNear, GoalNearXZ, GoalBlock, GoalXZ, GoalY, GoalInvert, GoalFollow, GoalBreakBlock } = require('mineflayer-pathfinder').goals;
@@ -27,6 +28,8 @@ function startClient(options) {
 
 	// TODO: Disable building/breaking by default
 	var defaultMove = new Movements(bot, bot.registry);
+	defaultMove.allow1by1towers = false // Do not build 1x1 towers when going up
+  	defaultMove.canDig = false // Disable breaking of blocks when pathing 
 	bot.pathfinder.setMovements(defaultMove);
 
 	bot.on('error', function(reason) {
