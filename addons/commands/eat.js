@@ -1,8 +1,6 @@
 module.exports = {
   addon: {
     cmd: 'eat',
-    //args: [''],
-    //autocomplete: ['players', 'args'],
     usage: 'eat <item>',
     description: 'Follow a target player.',
     useLanguage: true,
