@@ -3,7 +3,7 @@ module.exports = {
     cmd: 'eat',
     usage: 'eat <item>',
     description: 'Follow a target player.',
-    useLanguage: true,
+    useLanguageFile: true,
     handler: async function(sender, args) {
       let lang = this.lang;
       if (!bot?.entity) return echo(lang.no_bot);

@@ -6,7 +6,7 @@ module.exports = {
     autocomplete: ['args'],
     usage: 'nearby',
     description: 'Show nearby players or mobs.',
-    useLanguage: true,
+    useLanguageFile: true,
     handler: function(sender, args) {
       let lang = this.lang;
       if (!bot?.entity) return echo(lang.no_bot);

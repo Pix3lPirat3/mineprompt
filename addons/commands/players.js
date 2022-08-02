@@ -3,7 +3,7 @@ module.exports = {
     cmd: 'players',
     usage: 'players',
     description: 'Show online players.',
-    useLanguage: true,
+    useLanguageFile: true,
     handler: async function(sender, args) {
       let lang = this.lang;
       if (!bot?.entity) return echo(lang.no_bot);
