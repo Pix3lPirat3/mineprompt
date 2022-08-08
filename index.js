@@ -39,47 +39,11 @@ const createWindow = () => {
   mainWindow.webContents.on('before-input-event', (event, input) => {
     if (input.control && input.shift && input.key.toLowerCase() === 'i') {
       event.preventDefault();
-      openDevTools();
+      mainWindow.webContents.openDevTools();
     }
   });
 
-  let devtools = null;
-
-  mainWindow.on('minimize', function() {
-    if(devtools && !devtools.isMinimized()) devtools.minimize();
-  })
-
-  // Window is restored from minimization
-  mainWindow.on('restore', function() {
-    if(devtools && devtools.isMinimized()) devtools.restore();
-  })
-
-  // Open the DevTools.
-  function openDevTools() {
-    /*
-    devtools = new BrowserWindow({ show: false, width: 350, height: 500 });
-    mainWindow.webContents.setDevToolsWebContents(devtools.webContents);
-    mainWindow.webContents.openDevTools({ mode: 'detach' });
-      if(!devtools) return;
-      var windowBounds = mainWindow.getBounds();
-      devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
-      devtools.show();
-    */
-    mainWindow.webContents.openDevTools();
-  }
-
-  if(settings.devtools) openDevTools();
-
-  app.setUserTasks([
-    {
-      program: process.execPath + ' .',
-      arguments: '--new-window',
-      iconPath: process.execPath + ' .',
-      iconIndex: 0,
-      title: 'New Window',
-      description: 'Create a new window'
-    }
-  ])
+  if(settings.devtools) mainWindow.webContents.openDevTools();
 
 }
 
