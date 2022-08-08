@@ -1,0 +1,7 @@
+{
+  "lang":
+  {
+    "no_bot": "[Cmd] There is no bot entity..",
+    "command_sent": "[Cmd] Sent the command \"[[;goldenrod;]{cmd}]\""
+  }
+}

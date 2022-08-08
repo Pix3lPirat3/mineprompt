@@ -5,9 +5,9 @@ module.exports = {
     autocomplete: ['players'],
     usage: 'cmd <command>',
     description: 'Run a command.',
-    useLanguageFile: true,
+    useConfig: true,
     handler: async function(sender, args) {
-      let lang = this.lang;
+      let lang = this.config.lang;
       if (!bot?.entity) return echo(lang.no_bot);
       var command = args.join(' ');
       echo(lang.command_sent.replace('{cmd}', command))

@@ -56,10 +56,12 @@ module.exports = {
         delete require.cache[require.resolve(`${__dirname}/../addons/commands/${addon}`)];
 
         let mineprompt_addon = require(`${__dirname}/../addons/commands/${addon}`);
-
-        if(mineprompt_addon.addon.useLanguageFile) mineprompt_addon.addon.lang = JSON.parse(fs.readFileSync(`${__dirname}/../addons/language/${settings.language_code}/${addon.replace('js', 'json')}`));
         
-        if(mineprompt_addon.addon.useSettingsFile) mineprompt_addon.addon.settings = JSON.parse(fs.readFileSync(`${__dirname}/../addons/settings/${addon.replace('js', 'json')}`));
+        if(mineprompt_addon.addon.useConfig) {
+          let filePath = `${__dirname}/../addons/configs/${addon.replace('js', 'json')}`;
+          if(!fs.existsSync(filePath)) fs.writeFileSync(filePath, '{}');
+          mineprompt_addon.addon.config = JSON.parse(fs.readFileSync(filePath));
+        }
 
         var cmd = mineprompt_addon.addon.cmd;
         if (term_commands[cmd]) return echo(`[[;#FF5555;]Error] [[;#777777;]\u00bb] There was a repeated command "[[;#FF5555;]${cmd}]" in file "[[;#FF5555;]${addon}]"`);

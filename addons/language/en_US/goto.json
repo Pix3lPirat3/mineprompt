@@ -1,9 +1,0 @@
-{
-  "no_bot": "[Goto] There is no bot entity to search around..",
-  "no_argument": "[Goto] You must specify a target..",
-  "no_target_found": "[Goto] Unable to find the specified target \"{target}\"..",
-  "started": "[Goto] Going to {target}",
-  "stopped": "[Goto] No longer going to target..",
-  "arrived": "[Goto] Arrived at {target}",
-  "failed": "[Goto] Unable to get to {target}"
-}

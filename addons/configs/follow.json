@@ -1,0 +1,10 @@
+{
+  "lang":
+  {
+    "no_bot": "[Follow] There is no bot entity to search around..",
+    "no_argument": "[Follow] You must specify a target..",
+    "no_target_found": "[Follow] Unable to find the specified target \"{type}\"..",
+    "started": "[Follow] Now following [[;goldenrod;]{target}]",
+    "stopped": "[Follow] No longer following a target.."
+  }
+}

@@ -1,5 +1,0 @@
-{
-  "no_bot": "[Players] There is no bot entity..",
-  "player_map": "[[;goldenrod;]{name}] [[;#AAAAAA;]({distance}m)]",
-  "player_msg": "[Players] Online Players: {map}"
-}

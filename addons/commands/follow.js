@@ -5,9 +5,9 @@ module.exports = {
     autocomplete: ['players', 'args'],
     usage: 'follow <player | nearest>',
     description: 'Follow a target player.',
-    useLanguageFile: true,
+    useConfig: true,
     handler: async function(sender, args) {
-      let lang = this.lang;
+      let lang = this.config.lang;
       if (!bot?.entity) return echo(lang.no_bot);
       if(!args[0]) return echo(lang.no_argument);
 

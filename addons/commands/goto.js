@@ -5,9 +5,9 @@ module.exports = {
     args: ['nearest', 'stop'],
     usage: 'goto <player> <range>',
     description: 'Go to a player or coordinates.',
-    useLanguageFile: true,
+    useConfig: true,
     handler: async function(sender, args) {
-      let lang = this.lang;
+      let lang = this.config.lang;
       if (!bot?.entity) return echo(lang.no_bot);
       if(args.length === 0) return echo(lang.no_argument);
 
