@@ -7,14 +7,15 @@ var settings = JSON.parse(fs.readFileSync('./internal/settings.json'));
 console.log(settings)
 
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, shell } = require('electron');
+const { app, BrowserWindow, shell, globalShortcut } = require('electron');
 const path = require('path');
 
+let mainWindow;
 const createWindow = () => {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     title: `MinePrompt v${require('./package.json').version}`,
-    width: 600,
+    width: 900,
     minWidth: 500,
     height: 500,
     webPreferences: {
@@ -55,6 +56,7 @@ const createWindow = () => {
 
   // Open the DevTools.
   function openDevTools() {
+    /*
     devtools = new BrowserWindow({ show: false, width: 350, height: 500 });
     mainWindow.webContents.setDevToolsWebContents(devtools.webContents);
     mainWindow.webContents.openDevTools({ mode: 'detach' });
@@ -62,9 +64,22 @@ const createWindow = () => {
       var windowBounds = mainWindow.getBounds();
       devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
       devtools.show();
+    */
+    mainWindow.webContents.openDevTools();
   }
 
   if(settings.devtools) openDevTools();
+
+  app.setUserTasks([
+    {
+      program: process.execPath + ' .',
+      arguments: '--new-window',
+      iconPath: process.execPath + ' .',
+      iconIndex: 0,
+      title: 'New Window',
+      description: 'Create a new window'
+    }
+  ])
 
 }
 
