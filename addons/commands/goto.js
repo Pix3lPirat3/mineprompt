@@ -26,8 +26,7 @@ module.exports = {
           }
       }
 
-      if(isPlayer = Object.values(bot.players).filter(e => e.username === args[0])[0]) {
-          let target = args[0] === 'nearest' ? bot.nearestEntity(e => e.type === 'player') : isPlayer.entity;
+      if(target = Object.values(bot.players).filter(e => e.username === args[0])[0]?.entity) {
           if(!target) return echo(lang.no_target_found.replace('{target}', args[0]));
           let { x, y, z } =  target.position;
           echo(lang.started.replace('{target}', Object.values(target.position).map(i => Math.floor(i)).join(', ')))
