@@ -1,0 +1,9 @@
+{
+  "lang":
+  {
+    "no_bot": "[LookAt] There is no bot entity to search around..",
+    "no_argument": "[LookAt] You must specify a target..",
+    "no_target_found": "[LookAt] Unable to find the specified target \"{target}\"..",
+    "started": "[LookAt] Looking at \"{target}\".."
+  }
+}
