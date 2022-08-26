@@ -14,7 +14,12 @@
 ---
 
 ### Notice
-This is an early release of this project, feel free to contribute and message on Discord (Pix3lPirat3#3858) for support.
+As of about August 20th, I've decided to do a complete rewrite of MinePrompt, it's internals, and externals.
+*Simply the way it functions, and the way it looks.*
+
+I'll be making MinePrompt multithreaded, using a thread per bot. The UI will be able to handle multiple terminals at once, for quick-peek, quick-switch, and quick-control access.
+
+If you'd like to see previews or ask for progress, just ask me on Discord. *If you can find me*
 
 If you'd like support for using [Mineflayer](https://github.com/PrismarineJS/mineflayer/) check out their [Discord](https://discord.gg/sMvsKNvPc5)
 
