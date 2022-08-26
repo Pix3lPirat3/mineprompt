@@ -33,7 +33,10 @@ module.exports = {
             port: host.length ? host[1] : 25565,
             version: args[2] || '1.18.2',
             auth: args[3] == true ? undefined : 'microsoft',
-            skipValidation: args[3] == true ? true : false
+            skipValidation: args[3] == true ? true : false,
+            onMsaCode: function(data) {
+                echo(`Go to ${data.verification_uri}, enter the code "${data.user_code}"`)
+            }
           };
           startClient(options);
           return;
