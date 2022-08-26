@@ -1,4 +1,5 @@
 var mineflayer = require('mineflayer');
+const { Vec3 } = require('vec3');
 var utils = require('./../utils.js');
 
 const Movements = require('mineflayer-pathfinder').Movements;

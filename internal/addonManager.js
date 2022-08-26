@@ -4,7 +4,17 @@ module.exports = {
 
   getCommands: function() {
 
-    if(bot) bot.pathfinder.stop();
+    if(bot) {
+      bot.pathfinder.stop();
+      bot.stopDigging();
+      bot.clearControlStates();
+    }
+
+
+    Object.values(term_commands).forEach(function(e) {
+      if(e.onReload) e.onReload();
+    });
+
 
     // Default Commands
     term_commands = {
