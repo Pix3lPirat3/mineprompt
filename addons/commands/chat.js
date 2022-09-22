@@ -8,7 +8,7 @@ module.exports = {
     useConfig: true,
     handler: async function(sender, args) {
       let lang = this.config.lang;
-      let settings = this.settings;
+      let settings = this.config.settings;
       if (!bot?.entity) return echo(lang.no_bot);
       var message = args.join(' ');
       if(settings.print) {
