@@ -1,0 +1,8 @@
+{
+  "lang":
+  {
+    "no_bot": "[AFK] There is no bot entity..",
+    "unknown_method": "[AFK] Unkown AFK method \"[[;indianred;]{method}]\"",
+    "starting": "[AFK] Using method \"[[;goldenrod;]{method}]\" (Interval \"[[;goldenrod;]{interval}]\")"
+  }
+}
