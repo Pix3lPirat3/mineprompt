@@ -35,7 +35,7 @@ module.exports = {
             auth: args[3] == true ? undefined : 'microsoft',
             skipValidation: args[3] == true ? true : false,
             onMsaCode: function(data) {
-                echo(`Go to ${data.verification_uri}, enter the code "${data.user_code}"`)
+                echo(`Go to ${data.verification_uri} , enter the code "${data.user_code}"`)
             }
           };
           startClient(options);

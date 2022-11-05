@@ -19,6 +19,6 @@
     "request": "^2.88.2"
   },
   "devDependencies": {
-    "electron": "^20.2.0"
+    "electron": "^21.2.0"
   }
 }
