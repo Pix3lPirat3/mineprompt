@@ -1,4 +1,6 @@
-var fs = require('fs');
+let fs = require('fs');
+let glob = require("glob");
+let path = require('path');
 
 module.exports = {
 
@@ -10,11 +12,9 @@ module.exports = {
       bot.clearControlStates();
     }
 
-
     Object.values(term_commands).forEach(function(e) {
       if(e.onReload) e.onReload();
     });
-
 
     // Default Commands
     term_commands = {
@@ -64,14 +64,13 @@ module.exports = {
     let command_files = this.getFiles('commands');
     command_files.forEach(function(addon) {
       try {
+        delete require.cache[require.resolve(addon)];
 
-        // Removes the cache'd file, so it can be required again
-        delete require.cache[require.resolve(`${__dirname}/../addons/commands/${addon}`)];
-
-        let mineprompt_addon = require(`${__dirname}/../addons/commands/${addon}`);
+        let mineprompt_addon = require(addon);
         
         if(mineprompt_addon.addon.useConfig) {
-          let filePath = `${__dirname}/../addons/configs/${addon.replace('js', 'json')}`;
+          let fileName = path.basename(addon);
+          let filePath = `${__dirname}/../addons/configs/${fileName.replace('js', 'json')}`;
           if(!fs.existsSync(filePath)) fs.writeFileSync(filePath, '{}');
           mineprompt_addon.addon.config = JSON.parse(fs.readFileSync(filePath));
         }
@@ -81,9 +80,11 @@ module.exports = {
         term_commands[cmd] = mineprompt_addon.addon;
       } catch (e) {
         echo(`[[;#FF5555;]Error] [[;#777777;]\u00bb] Unable to load the command file "[[;#FF5555;]${addon}]", skipping it.. [[;#FFA500;](Check Console)]`);
-        console.log(`Unable to load the command file "${addon}", skipping it:\n`, e);
+        console.log(`\nUnable to load the command file "${addon}", skipping it:\n`, e, '\n');
       }
     });
+
+    console.log(`MinePrompt » Registered [${Object.keys(term_commands).length}] commands..`)
 
   },
 
@@ -91,10 +92,9 @@ module.exports = {
     // TODO : Implement when needed
   },
 
+  // Get all command files inside /addons/commands/*, recursively to allow sorting commands
   getFiles: function(type) {
-    let dir = `${__dirname}/../addons/${type}`;
-    let files = fs.readdirSync(`${__dirname}/../addons/${type}`).filter(file => file.endsWith('.js'));
-    return files;
+    return glob.sync(`./addons/commands/**/*.js`, { realpath: true, absolute: true });
   }
 
 }
