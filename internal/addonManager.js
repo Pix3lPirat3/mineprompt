@@ -7,7 +7,7 @@ module.exports = {
   getCommands: function() {
 
     if(bot) {
-      bot.pathfinder.stop();
+      bot.pathfinder?.stop();
       bot.stopDigging();
       bot.clearControlStates();
     }
@@ -17,6 +17,7 @@ module.exports = {
     });
 
     // Default Commands
+    // https://github.com/dpup/node-flags || https://github.com/privatenumber/type-flag
     term_commands = {
       connect: {
         cmd: 'connect',

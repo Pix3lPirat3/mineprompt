@@ -10,6 +10,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "glob": "^8.0.3",
     "jquery.terminal": "^2.34.0",
     "mineflayer": "*",
     "mineflayer-pathfinder": "*",
