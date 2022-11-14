@@ -70,8 +70,8 @@ async function startClient(options) {
 
 	bot.once('end', function(reason) {
 		if (chatLogger) chatLogger.end();
-		sessionTimer = clearInterval(sessionTimer);
 		echo(`\n[End]\n\n[[;#FF5555;]Session Ended]\n${bot.username}'s connection ended: [[;#FF5555;]${reason}]\nSession Runtime: [[;goldenrod;]${sessionRuntime}]\n`)
+		sessionTimer = clearInterval(sessionTimer);
 		$('#footer-left').text(`OFFLINE`);
 		$('#footer-right').text(`Runtime: ENDED`);
 		bot = null;
