@@ -34,7 +34,7 @@ module.exports = {
           let host = opts.h || opts.host;
           if(!host) return echo('You must specify a host with -h or --host')
           let port = opts.p || opts.port;
-          if(!port) return echo('You can specify a port with -p or --port')
+          if(!port) echo('You can specify a port with -p or --port')
           let version = opts.v || opts.version;
           if(!version) return echo('You must specify a version with -v or --version')
           let authentication = opts.a || opts.auth; // (Default: true)
