@@ -55,7 +55,7 @@ async function startClient(options) {
 
 		if (!formatterRegistered) {
 			$.terminal.new_formatter(function(string, options) {
-				if (options.echo) return string.replace(new RegExp(bot.username || 'NULL', 'gi'), `[[;goldenrod;]${bot.username}]`);
+				if (options.echo) return string.replace(new RegExp(bot?.username || 'NULL', 'gi'), `[[;goldenrod;]${bot?.username}]`);
 			});
 		}
 
