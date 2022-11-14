@@ -1,6 +1,7 @@
 let fs = require('fs');
 let glob = require("glob");
 let path = require('path');
+const parseSentence = require('minimist-string');
 
 module.exports = {
 
@@ -17,30 +18,55 @@ module.exports = {
     });
 
     // Default Commands
-    // https://github.com/dpup/node-flags || https://github.com/privatenumber/type-flag
     term_commands = {
       connect: {
         cmd: 'connect',
         aliases: ['conn'],
-        usage: 'connect <username> <server:port> [version] [offline]',
+        usage: 'connect -u [username] -h <host> -p [port] -v <version> -auth [true\\false]',
         description: 'Connect to a server',
         handler: function(sender, args) {
-          if (!args || args.length <= 1) return echo('Connect [[;#777777;]\u00bb] \"[[;goldenrod;]connect <username> <server:port> [version&#93;  [offline&#93;]\"\n');
-          if(args[3] == true) echo(`[[;#FF5555;]Warning] [[;#777777;]\u00bb] Connecting without authentication..`)
-          var host = args[1].split(':');
-          var options = {
-            username: args[0],
-            host: host[0],
-            port: host.length ? host[1] : 25565,
-            version: args[2] || '1.18.2',
-            auth: args[3] == true ? undefined : 'microsoft',
-            skipValidation: args[3] == true ? true : false,
+
+          let opts = parseSentence(args.join(' '));
+
+          // NOTE : When using shorthand (-host) only one `-` is needed, when using longhand (--host) two are needed.
+          let username = opts.u || opts.username;
+          if(!username) username = 'Anonymous' + generateNumber(7), opts.v, opts.auth = false; // If no username is specified - use Anyonymous and disable authentication
+          let host = opts.h || opts.host;
+          if(!host) return echo('You must specify a host with -h or --host')
+          let port = opts.p || opts.port;
+          if(!port) return echo('You can specify a port with -p or --port')
+          let version = opts.v || opts.version;
+          if(!version) return echo('You must specify a version with -v or --version')
+          let authentication = opts.a || opts.auth; // (Default: true)
+          if(!authentication) echo('You can specify authentication with -a or --auth (-a=true/false)')
+          // Converting the "String" passed from the input to a Boolean (There must be a better way..)
+          if(authentication === 'false' || authentication === '0') authentication = false; // Convert to Boolean
+          if(authentication === 'true' || authentication === '1' || authentication == undefined) authentication = true; // Convert to Boolean
+
+          let options = {
+            username: username,
+            host: host,
+            port: port,
+            version: version,
+            auth: authentication ? 'microsoft' : undefined,
+            skipValidation: !authentication,
             onMsaCode: function(data) {
-                echo(`Go to ${data.verification_uri} , enter the code "${data.user_code}"`)
+                echo(`Use the code "${data.user_code}" on ${data.verification_uri} to authenticate your account.`)
+                echo(`If you don't want to authenticate then add '-a false' (or --auth false)`)
             }
-          };
+          }
+
           startClient(options);
-          return;
+
+          // Generates a number (l being length of digits)
+          function generateNumber(length) {
+              var add = 1, max = 12 - add; // 12 is the min safe number Math.random() can generate without it starting to pad the end with zeros.   
+              if (length > max) return generate(max) + generate(length - max);
+              max = Math.pow(10, length + add);
+              var min = max / 10; // Math.pow(10, length) basically
+              var number = Math.floor(Math.random() * (max - min + 1)) + min;
+              return ("" + number).substring(add);
+          }
         }
       },
       reload: {
@@ -48,7 +74,7 @@ module.exports = {
         description: 'Reload the command system',
         handler: function(sender, args) {
           echo(`\n[[;#FFA500;]Reload] [[;#777777;]\u00bb] Reloading the command manager..`);
-          echo(`[[;#FFA500;]Warning] [[;#777777;]\u00bb] This may cause issues with event listeners.. ([[!;;;;https://github.com/Pix3lPirat3/mineprompt#reload-warning]Wiki])\n`);
+          echo(`[[;#FFA500;]Warning] [[;#777777;]\u00bb] This causes issues with events, timers, and more.. ([[!;;;;https://github.com/Pix3lPirat3/mineprompt#reload-warning]Wiki])\n`);
           return commander.getCommands();
         }
       },
@@ -56,7 +82,7 @@ module.exports = {
         cmd: 'help',
         description: 'Display the help menu',
         handler: function() {
-          if (!bot?.entity) return echo('Connect [[;#777777;]\u00bb] \"[[;goldenrod;]connect <username> <server:port> [version&#93; [offline&#93;]\"\n');
+          if (!bot?.entity) return echo(term_commands.connect.usage);
           return echo('\n[[;#FFA500;]MinePrompt Commands:]\n' + Object.entries(term_commands).map(([a, b]) => `"${b.cmd}" \u00bb "${b.description}"`).join('\n') + '\n');
         }
       }

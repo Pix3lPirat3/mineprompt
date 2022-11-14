@@ -17,7 +17,7 @@ var formatterRegistered = false;
 var commander = require('../internal/addonManager');
 commander.getCommands();
 
-function startClient(options) {
+async function startClient(options) {
 
 	echo(`\n[[;#FFA500;]Connect] [[;#777777;]\u00bb] Connecting [[;#FFA500;]${options.username}] to [[;#FFA500;]${options.host}]..\n`)
 
@@ -28,7 +28,7 @@ function startClient(options) {
 	bot.loadPlugin(pathfinder);
 
 	// TODO: Disable building/breaking by default
-	var defaultMove = new Movements(bot, bot.registry);
+	var defaultMove = new Movements(bot);
 	defaultMove.allow1by1towers = false // Do not build 1x1 towers when going up
   	defaultMove.canDig = false // Disable breaking of blocks when pathing 
 	bot.pathfinder.setMovements(defaultMove);
@@ -61,6 +61,7 @@ function startClient(options) {
 
 		sessionTimer = setInterval(function() {
 			sessionRuntime = moment.preciseDiff(sessionStart, Date.now());
+			if(!bot?.entity) return;
 			let pos = bot.entity.position.floored();
 			$('#footer-left').text(`Runtime: ${sessionRuntime}`);
 			$('#footer-right').text(`Health: ${bot.health} | Hunger: ${bot.food} | Position: ${pos}`);
@@ -68,12 +69,12 @@ function startClient(options) {
 	})
 
 	bot.once('end', function(reason) {
-		bot.entity = null;
 		if (chatLogger) chatLogger.end();
 		sessionTimer = clearInterval(sessionTimer);
 		echo(`\n[End]\n\n[[;#FF5555;]Session Ended]\n${bot.username}'s connection ended: [[;#FF5555;]${reason}]\nSession Runtime: [[;goldenrod;]${sessionRuntime}]\n`)
 		$('#footer-left').text(`OFFLINE`);
 		$('#footer-right').text(`Runtime: ENDED`);
+		bot = null;
 	})
 
 	bot.on('death', function() {

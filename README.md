@@ -27,7 +27,7 @@ If you'd like support for using [Mineflayer](https://github.com/PrismarineJS/min
 
 Usage Video: [Pix3lPirat3's Usage YouTube](https://www.youtube.com/watch?v=CK3QPQXZloQ&ab_channel=Pix3lPirat3)
 
-Create your copy of the repository on your system, go to the directory, then install the modules
+Create your copy of the repository on your system, go to the directory, then install the modules. This includes [ElectronJS](https://www.npmjs.com/package/electron)
 ```bash
 npm i
 ```
@@ -43,7 +43,7 @@ npm run start
 
 ### Reload Warning
 
-Using the `reload` command reloads the **commands system and language files (only)** by reading and loading the command files into memory. This may cause issues with any events registered in command listeners.
+Using the `reload` command reloads the **commands system and language files (only)** by reading and loading the command files into memory. This may cause issues with any events registered in command listeners, as they're set on variables that are not reloaded, such as `bot`.
 
 ### Planned Features
 
@@ -57,6 +57,14 @@ Using the `reload` command reloads the **commands system and language files (onl
 - [x] Nearby `nearby <players, mobs>`  (Get the nearby players / mobs)
 - [x] Follow `follow <player | stop>`  (Follow a player)
 - [x] Goto `goto <player | nearest | stop | xz | xyz>`  (Go to a player, or coordinates)
+- [x] Lookat `lookat <player|direction|block>` (Look at a specific player, direction, or block)
+- [x] Eat `eat [item]` (Eat an item (sorted by food points), optionally specify an item)
+- [x] Players `players` (Get a list of online players)
+- [x] Quit `quit` (Gracefully quits the server)
+- [x] AFK `afk <method>` (Use a specific method of anti-afk, such as left/right clicking, jumping, moving, and so on)
+- [x] Chat `chat <message>` (Sends your message to the in-game chat)
+- [x] Cmd `cmd <command>` (Sends your command to the in-game chat)
+- [x] Eval `eval <code>` (Evaluates the specified code, returns the result)
 - [ ] Settings `settings <settings.key> <value>`  (Set a value in the settings)
 - [ ] Inventory `inventory` (Show the player's inventory) 
 - [ ] Drop `drop <item | all> [amount]` (Drop items from inventory)
@@ -67,13 +75,10 @@ Using the `reload` command reloads the **commands system and language files (onl
 - [ ] Mend `mend <item(s)>` (Equip items with mending in the offhand, once repaired switch and repeat)
 - [ ] Fish `fish [amount] [saveDurability]` (Fish, a specific amount, and whether to save durability or not)
 - [ ] Build `build <schematic> <location>` (Advanced command, will be a way-later-project, and definitely will have tons of flaws)
-- [x] Eat `eat [item]` (Eat an item (sorted by food points), optionally specify an item)
 - [ ] Move `move <left|right|backwards|forwards|north|east|south|west> [amount]` (Move a specific amount of blocks in a direction)
-- [ ] AFK `afk <method>` (Use a specific method of anti-afk, such as left/right clicking, jumping, moving, and so on)
 - [ ] Farm `farm <crop> [time] [region]` (Farm a crop for an optional time, and in an optional region. Storage chests can be defined)
 - [ ] Quarry `quarry [depth]` (Quarry a chunk to a specific depth / Y coordinate)
 - [ ] Mineshaft `mineshaft <type> <distance/time>` (Create a mineshaft at current coordinates, branch mining)
-- [x] Lookat `lookat <player|direction|block>` (Look at a specific player, direction, or block)
 - [ ] Generator `generator [saveDurability] [switchTools] [mendingOnly]` (Stationary mining, e.g. cobblestone generators)
 
 ### License
