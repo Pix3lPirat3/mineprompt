@@ -6,6 +6,8 @@ module.exports = {
     handler: async function(sender, args) {
       if (!bot?.entity) return echo('There is no bot entity..');
       bot.setQuickBarSlot(args[0])
+      let heldItem = bot.heldItem?.name || 'nothing'; 
+      echo(`Now holding ${heldItem}`)
     }
   }
 };
