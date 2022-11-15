@@ -1,6 +1,6 @@
 {
   "name": "mineprompt",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "A Mineflayer Terminal created with ElectronJS",
   "main": "index.js",
   "scripts": {
