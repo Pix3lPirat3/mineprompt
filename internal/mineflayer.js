@@ -40,6 +40,24 @@ async function startClient(options) {
 		echo(`[Kicked] The client was kicked:\n[[;#FF5555;]${reason}]`);
 	})
 
+	bot.mineprompt = {
+		masters: [] // Pix3lPirat3, Pix3lSlime
+	}
+
+	let prefix = '!';
+	bot.on('chat', function(username, message) {
+		if(!message.startsWith('!')) return;
+		if(!bot.mineprompt.masters.includes(username)) return;
+
+		const args = message.slice(prefix.length).trim().split(/ +/g);
+		const command = args.shift().toLowerCase();
+
+		var cmd_object = Object.entries(term_commands).filter(([a, b]) => b.cmd === command || b.aliases?.includes(command))?.[0]?.[1];
+		if(!cmd_object) return;
+
+  		cmd_object.handler(username, args);
+	})
+
 	bot.on('spawn', function() {
 		let pos = bot.entity.position.floored();
 		echo(`[Events] [Spawn] ${bot.username} has spawned. (Position: X: ${pos.x}, Y: ${pos.y}, Z: ${pos.z})`)
