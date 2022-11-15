@@ -14,7 +14,7 @@ module.exports = {
         if(e.message === 'threshold') return echo(`The bot was too full to eat, skipping.`);
         if(e.message === 'no_food') return echo(`We have no items to eat!`);
         console.log(e)
-      }).done();
+      });
 
       
     }
