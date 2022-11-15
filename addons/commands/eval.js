@@ -4,6 +4,7 @@ module.exports = {
     usage: 'eval <code>',
     description: 'Run a segment of code',
     handler: async function(sender, args) {
+      if(sender !== 'CONSOLE') return;
       if (!bot?.entity) return echo(lang.no_bot);
 
       let code = args.join(' ');
