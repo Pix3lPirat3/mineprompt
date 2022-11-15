@@ -65,6 +65,8 @@ Using the `reload` command reloads the **commands system and language files (onl
 - [x] Chat `chat <message>` (Sends your message to the in-game chat)
 - [x] Cmd `cmd <command>` (Sends your command to the in-game chat)
 - [x] Eval `eval <code>` (Evaluates the specified code, returns the result)
+- [x] Addowner `addowner <player>` (Adds player as a master - to use in-game commands)
+- [x] Removeowner `removeowner <player>` (Removes player as a master)
 - [ ] Settings `settings <settings.key> <value>`  (Set a value in the settings)
 - [ ] Inventory `inventory` (Show the player's inventory) 
 - [ ] Drop `drop <item | all> [amount]` (Drop items from inventory)
