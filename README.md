@@ -2,6 +2,7 @@
 <p align="center"><i>A Mineflayer Terminal created with ElectronJS.</i></p>
 
 <p align="center">
+  <a href="https://discord.gg/mS593SMRVh"><img src="https://img.shields.io/discord/1041349721916186725"></a>
   <img src="https://img.shields.io/github/repo-size/Pix3lPirat3/mineprompt" />
   <img src="https://img.shields.io/github/contributors/Pix3lPirat3/mineprompt" />
   <img src="https://img.shields.io/github/license/Pix3lPirat3/mineprompt" />
