@@ -9,6 +9,10 @@
 </p>
 
 <p align="center">
+  <a href="https://discord.gg/mS593SMRVh">Support Discord</a>
+</p>
+
+<p align="center">
   <img width="460" height="300" src="https://i.imgur.com/Jar4wMi.png">
 </p>
 
