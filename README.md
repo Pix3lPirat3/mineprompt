@@ -43,6 +43,7 @@ Usage Video: [Pix3lPirat3's Usage YouTube](https://www.youtube.com/watch?v=CK3QP
 Create your copy of the repository on your system, go to the directory, then install the modules. This includes [ElectronJS](https://www.npmjs.com/package/electron)
 ```bash
 npm i
+npm i electron -g
 ```
 
 Start the terminal by running
