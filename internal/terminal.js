@@ -29,7 +29,7 @@ var term = $('#terminal').terminal(function(input) {
  |_|  |_|_|_| |_|\\___|_|   |_|  \\___/|_| |_| |_| .__/ \\__|
                                                |_|        
 
-Consider supporting the developer by upgrading to the [[!;;;;http://discord.deptofcraft.com]premium version] ([[!;;;;https://discord.gg/5FV56jKwpk]discord])
+Consider supporting the developer by upgrading to the [[!;;;;http://5FV56jKwpk]premium version] ([[!;;;;5FV56jKwpk]discord])
     `;
   },
   onInit: function(term) {
