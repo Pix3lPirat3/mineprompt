@@ -1,4 +1,5 @@
-<h1 align="center">MinePrompt</h1>
+<h1 align="center">MinePrompt (DEPRECATED)</h1>
+<p align="center"><i>This project is now deprecated, use <a href="https://github.com/Pix3lPirat3/mineprompt_rewritten">mineprompt rewritten</a></i></p>
 <p align="center"><i>A Mineflayer Terminal created with ElectronJS.</i></p>
 
 <p align="center">
