@@ -3,7 +3,7 @@
 <p align="center"><i>A Mineflayer Terminal created with ElectronJS.</i></p>
 
 <p align="center">
-  <a href="https://discord.gg/mS593SMRVh"><img src="https://img.shields.io/discord/1041349721916186725"></a>
+  <a href="https://discord.gg/5FV56jKwpk"><img src="https://img.shields.io/discord/1041349721916186725"></a>
   <img src="https://img.shields.io/github/repo-size/Pix3lPirat3/mineprompt" />
   <img src="https://img.shields.io/github/contributors/Pix3lPirat3/mineprompt" />
   <img src="https://img.shields.io/github/license/Pix3lPirat3/mineprompt" />
@@ -19,13 +19,21 @@
 
 ---
 
+Shield: [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
+
+This work is licensed under a
+[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
+
+[![CC BY-NC-SA 4.0][cc-by-nc-sa-image]][cc-by-nc-sa]
+
+[cc-by-nc-sa]: http://creativecommons.org/licenses/by-nc-sa/4.0/
+[cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
+[cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
+
+---
+
 ### Notice
-As of about August 20th, I've decided to do a complete rewrite of MinePrompt, it's internals, and externals.
-*Simply the way it functions, and the way it looks.*
-
-I'll be making MinePrompt multithreaded, using a thread per bot. The UI will be able to handle multiple terminals at once, for quick-peek, quick-switch, and quick-control access.
-
-If you'd like to see previews or ask for progress, just ask me on Discord. *If you can find me*
+You can check out the updated version of MinePrompt at https://discord.gg/5FV56jKwpk
 
 If you'd like support for using [Mineflayer](https://github.com/PrismarineJS/mineflayer/) check out their [Discord](https://discord.gg/sMvsKNvPc5)
 
@@ -36,6 +44,7 @@ Usage Video: [Pix3lPirat3's Usage YouTube](https://www.youtube.com/watch?v=CK3QP
 Create your copy of the repository on your system, go to the directory, then install the modules. This includes [ElectronJS](https://www.npmjs.com/package/electron)
 ```bash
 npm i
+npm i electron -g
 ```
 
 Start the terminal by running
